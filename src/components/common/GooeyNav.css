@@ -49,7 +49,7 @@
   display: inline-flex;
   align-items: center;
   padding: 6px 14px;
-  font-family: 'Inter', system-ui, sans-serif;
+  font-family: var(--font-inter), system-ui, sans-serif;
   font-size: 11px;
   font-weight: 600;
   letter-spacing: 0.02em;
@@ -88,7 +88,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  font-family: 'Inter', system-ui, sans-serif;
+  font-family: var(--font-inter), system-ui, sans-serif;
   font-size: 11px;
   font-weight: 700;
   color: #FFFFFF;

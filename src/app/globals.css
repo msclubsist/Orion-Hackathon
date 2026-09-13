@@ -34,18 +34,18 @@
       radial-gradient(ellipse at 50% 0%, #071426 0%, #020617 70%, #000000 100%);
     background-attachment: fixed;
     color: #F8FAFC;
-    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    font-family: var(--font-inter), system-ui, -apple-system, sans-serif;
     overflow-x: hidden;
     letter-spacing: -0.01em;
   }
 
   h1, h2, h3, h4, .font-display {
-    font-family: 'Space Grotesk', 'Inter', system-ui, sans-serif;
+    font-family: var(--font-space-grotesk), var(--font-inter), system-ui, sans-serif;
     letter-spacing: -0.02em;
   }
 
   .font-mono-hud {
-    font-family: 'Inter', system-ui, sans-serif;
+    font-family: var(--font-inter), system-ui, sans-serif;
   }
 }
 

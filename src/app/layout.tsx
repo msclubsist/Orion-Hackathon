@@ -1,7 +1,24 @@
 import type { Metadata, Viewport } from 'next';
+import { Inter, Space_Grotesk } from 'next/font/google';
 import './globals.css';
 import { SiteJsonLd } from '@/components/seo/JsonLd';
 import { OG_IMAGE, SITE_NAME, SITE_URL } from '@/lib/site';
+
+// Self-hosted at build time: no render-blocking request to fonts.googleapis.com,
+// and size-adjusted fallbacks keep text from shifting when the font swaps in.
+const inter = Inter({
+  subsets: ['latin'],
+  weight: ['400', '500', '600', '700', '800'],
+  display: 'swap',
+  variable: '--font-inter',
+});
+
+const spaceGrotesk = Space_Grotesk({
+  subsets: ['latin'],
+  weight: ['500', '600', '700'],
+  display: 'swap',
+  variable: '--font-space-grotesk',
+});
 
 const TITLE = 'ORION 1.0 | 24-Hour National Level Hackathon in Chennai';
 // ~155 characters so Google shows it untruncated.
@@ -100,22 +117,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en-IN" className="scroll-smooth">
+    <html lang="en-IN" className={`scroll-smooth ${inter.variable} ${spaceGrotesk.variable}`}>
       <head>
         {/* Geo Location Tags for Chennai / Local Search Ranking */}
         <meta name="geo.region" content="IN-TN" />
         <meta name="geo.placename" content="Chennai" />
         <meta name="geo.position" content="12.8718;80.2207" />
         <meta name="ICBM" content="12.8718, 80.2207" />
-
-        {/* Google Fonts Preconnect */}
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        {/* eslint-disable-next-line @next/next/no-page-custom-font */}
-        <link 
-          href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap"
-          rel="stylesheet" 
-        />
         
         {/* JSON-LD Rich Structured Data Schemas */}
         <SiteJsonLd />
