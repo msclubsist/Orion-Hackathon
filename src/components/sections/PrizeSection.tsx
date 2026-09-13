@@ -87,6 +87,7 @@ export const PrizeSection: React.FC = () => {
                 duration={650}
                 className={`h-full ${isFirst ? 'lg:-translate-y-4' : ''}`}
               >
+                <div data-tilt className="h-full">
                 <GlassCard
                   glowColor={isFirst ? "cyan" : idx === 1 ? "violet" : "amber"}
                   className={`p-7 sm:p-8 flex flex-col justify-between border ${
@@ -143,6 +144,7 @@ export const PrizeSection: React.FC = () => {
                     <span className="text-white font-bold">{tier.amount} CASH GRANT</span>
                   </div>
                 </GlassCard>
+                </div>
               </ScrollReveal>
             );
           })}

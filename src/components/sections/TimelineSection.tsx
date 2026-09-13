@@ -28,10 +28,13 @@ export const TimelineSection: React.FC = () => {
         </ScrollReveal>
 
         {/* Timeline Path */}
-        <div className="max-w-4xl mx-auto relative text-left">
+        <div data-timeline className="max-w-4xl mx-auto relative text-left">
           
           {/* Vertical Trajectory Line */}
-          <div className="absolute left-4 sm:left-1/2 top-4 bottom-4 w-0.5 bg-gradient-to-b from-[#00BCF2] via-[#0078D4] to-[#071426] -translate-x-1/2 hidden sm:block shadow-[0_0_12px_rgba(0,188,242,0.4)]" />
+          <div data-timeline-line className="absolute left-4 sm:left-1/2 top-4 bottom-4 w-0.5 bg-gradient-to-b from-[#00BCF2] via-[#0078D4] to-[#071426] -translate-x-1/2 hidden sm:block shadow-[0_0_12px_rgba(0,188,242,0.4)]" />
+          <div aria-hidden="true" className="absolute left-1/2 top-4 bottom-4 w-0 hidden sm:block pointer-events-none">
+            <div data-timeline-comet className="timeline-comet" />
+          </div>
 
           <div className="space-y-8 relative">
             {TIMELINE_PHASES.map((item, idx) => {

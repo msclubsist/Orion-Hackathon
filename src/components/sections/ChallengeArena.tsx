@@ -62,6 +62,7 @@ export const ChallengeArena: React.FC<ChallengeArenaProps> = ({ onOpenProblemMod
             <ScrollReveal direction="up" delay={100} duration={600} className="md:col-span-12 lg:col-span-7 flex">
               <div 
                 onClick={() => onOpenProblemModal(ps1)}
+                data-spotlight
                 className="w-full group cursor-pointer text-left relative flex flex-col justify-between p-6 sm:p-8 md:p-9 bg-[#0B1220]/85 border border-white/10 hover:border-[#00BCF2]/60 transition-all duration-300 shadow-xl hover:shadow-[0_0_30px_rgba(0,188,242,0.15)] overflow-hidden"
               >
                 {/* Background Ambient Glow */}
@@ -139,6 +140,7 @@ export const ChallengeArena: React.FC<ChallengeArenaProps> = ({ onOpenProblemMod
             <ScrollReveal direction="up" delay={200} duration={600} className="md:col-span-12 lg:col-span-5 flex">
               <div 
                 onClick={() => onOpenProblemModal(ps2)}
+                data-spotlight
                 className="w-full group cursor-pointer text-left relative flex flex-col justify-between p-6 sm:p-8 bg-[#0B1220]/85 border border-white/10 hover:border-violet-500/60 transition-all duration-300 shadow-xl hover:shadow-[0_0_30px_rgba(139,92,246,0.15)] overflow-hidden"
               >
                 {/* Background Ambient Glow */}
@@ -211,6 +213,7 @@ export const ChallengeArena: React.FC<ChallengeArenaProps> = ({ onOpenProblemMod
             <ScrollReveal direction="up" delay={300} duration={600} className="md:col-span-12 lg:col-span-5 flex">
               <div 
                 onClick={() => onOpenProblemModal(ps3)}
+                data-spotlight
                 className="w-full group cursor-pointer text-left relative flex flex-col justify-between p-6 sm:p-8 bg-[#0B1220]/85 border border-white/10 hover:border-emerald-500/60 transition-all duration-300 shadow-xl hover:shadow-[0_0_30px_rgba(16,185,129,0.15)] overflow-hidden"
               >
                 {/* Background Ambient Glow */}
@@ -283,6 +286,7 @@ export const ChallengeArena: React.FC<ChallengeArenaProps> = ({ onOpenProblemMod
             <ScrollReveal direction="up" delay={400} duration={600} className="md:col-span-12 lg:col-span-7 flex">
               <div 
                 onClick={() => onOpenProblemModal(ps4)}
+                data-spotlight
                 className="w-full group cursor-pointer text-left relative flex flex-col justify-between p-6 sm:p-8 md:p-9 bg-[#0B1220]/85 border border-white/10 hover:border-cyan-400/60 transition-all duration-300 shadow-xl hover:shadow-[0_0_30px_rgba(0,188,242,0.15)] overflow-hidden"
               >
                 {/* Background Ambient Glow */}

@@ -35,7 +35,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onOpenStatus, onExplor
   ];
 
   return (
-    <section className="relative min-h-screen pt-20 sm:pt-24 pb-20 px-4 flex flex-col justify-center items-center z-10 overflow-hidden text-center">
+    <section data-hero className="relative min-h-screen pt-20 sm:pt-24 pb-20 px-4 flex flex-col justify-center items-center z-10 overflow-hidden text-center">
       
       {/* Microsoft Club Governance Telemetry Header */}
       <ScrollReveal direction="down" delay={50} duration={600} className="max-w-4xl mx-auto text-center mb-4 sm:mb-6 select-none">
@@ -72,6 +72,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onOpenStatus, onExplor
         
         {/* Grand Centered Hackathon Logo Showpiece */}
         <ScrollReveal direction="up" delay={100} duration={750} className="relative mb-6 flex flex-col items-center">
+          <div data-hero-parallax className="relative flex flex-col items-center">
           
           {/* Multi-layered Celestial Halo Background Effects */}
           <div className="absolute -inset-10 bg-gradient-to-r from-[#0078D4]/30 via-[#00BCF2]/45 to-[#22D3EE]/30 rounded-full blur-3xl animate-pulse-glow pointer-events-none" />
@@ -102,6 +103,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onOpenStatus, onExplor
                 24H NATIONAL OFFLINE HACKATHON • SIST CHENNAI
               </span>
             </div>
+          </div>
             <div className="hidden sm:block w-12 md:w-20 h-px bg-gradient-to-l from-transparent via-[#00BCF2]/40 to-[#00BCF2]" />
           </div>
 
@@ -113,10 +115,8 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onOpenStatus, onExplor
           <h1 className="text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-display font-black tracking-tight leading-[1.05] text-white">
             {/* The visible slogan carries no search terms; this names the event for crawlers and screen readers. */}
             <span className="sr-only">ORION 1.0 — 24-Hour National Level Hackathon in Chennai: </span>
-            Code. Innovate. <br />
-            <span className="text-gradient-azure">
-              Build the Future.
-            </span>
+            <span className="hero-line"><span className="hero-line-inner">Code. Innovate.</span></span>
+            <span className="hero-line"><span className="hero-line-inner hero-shine">Build the Future.</span></span>
           </h1>
 
           <p className="mt-5 text-base sm:text-lg md:text-xl text-[#BAE6FD] max-w-2xl mx-auto font-sans leading-relaxed font-normal">
@@ -127,6 +127,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onOpenStatus, onExplor
           {/* Centered Action Buttons */}
           <div className="pt-6 flex flex-col sm:flex-row items-center justify-center gap-4 w-full max-w-lg mx-auto">
             
+            <span data-magnetic="0.25" className="block w-full sm:w-auto">
             <a
               href={GOOGLE_FORM_REGISTRATION_URL}
               target="_blank"
@@ -140,6 +141,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onOpenStatus, onExplor
               <span>REGISTER YOUR TEAM — ₹100</span>
               <ChevronRight className="w-4 h-4 text-[#020617] group-hover:translate-x-1 transition-transform" />
             </a>
+            </span>
 
             {onOpenStatus && (
               <button

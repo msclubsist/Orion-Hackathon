@@ -126,6 +126,7 @@ export const Navbar: React.FC<NavbarProps> = ({ registrationEnabled = false }) =
             )}
 
             {/* Primary CTA */}
+            <span data-magnetic="0.35" className="inline-block">
             <a
               href={GOOGLE_FORM_REGISTRATION_URL}
               target="_blank"
@@ -135,6 +136,7 @@ export const Navbar: React.FC<NavbarProps> = ({ registrationEnabled = false }) =
               <Rocket className="w-3.5 h-3.5 text-[#020617]" />
               <span>Register Team — ₹100</span>
             </a>
+            </span>
           </div>
 
           {/* Mobile Navigation Toggle */}

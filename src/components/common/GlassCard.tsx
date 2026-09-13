@@ -21,6 +21,7 @@ export const GlassCard: React.FC<GlassCardProps> = ({
     <div
       onClick={onClick}
       style={style}
+      data-spotlight
       className={`
         relative overflow-hidden transition-all duration-300 ease-out
         bg-[#0B1220]/65 backdrop-blur-2xl border border-white/10 border-t-white/25
