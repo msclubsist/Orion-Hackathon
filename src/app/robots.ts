@@ -1,23 +1,21 @@
 import { MetadataRoute } from 'next';
 import { features } from '@/lib/features';
+import { SITE_URL } from '@/lib/site';
 
 export default function robots(): MetadataRoute.Robots {
-  const baseUrl = 'https://msclubsist.in';
-
   return {
     rules: [
       {
         userAgent: '*',
-        allow: features.registration ? ['/', '/portal'] : ['/'],
-        disallow: features.registration ? ['/admin', '/api/'] : ['/portal', '/admin', '/api/'],
-      },
-      {
-        userAgent: 'Googlebot',
-        allow: features.registration ? ['/', '/portal'] : ['/'],
-        disallow: features.registration ? ['/admin', '/api/'] : ['/portal', '/admin', '/api/'],
+        allow: ['/'],
+        disallow: [
+          '/admin',
+          '/api/',
+          '/uploads/',
+          ...(features.registration ? ['/portal/reset'] : ['/portal']),
+        ],
       },
     ],
-    sitemap: `${baseUrl}/sitemap.xml`,
-    host: baseUrl,
+    sitemap: `${SITE_URL}/sitemap.xml`,
   };
 }

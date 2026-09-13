@@ -111,6 +111,8 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onOpenStatus, onExplor
         <ScrollReveal direction="up" delay={180} duration={700} className="space-y-4 max-w-3xl">
           
           <h1 className="text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-display font-black tracking-tight leading-[1.05] text-white">
+            {/* The visible slogan carries no search terms; this names the event for crawlers and screen readers. */}
+            <span className="sr-only">ORION 1.0 — 24-Hour National Level Hackathon in Chennai: </span>
             Code. Innovate. <br />
             <span className="text-gradient-azure">
               Build the Future.

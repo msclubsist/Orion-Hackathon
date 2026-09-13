@@ -1,52 +1,40 @@
 import type { Metadata, Viewport } from 'next';
 import './globals.css';
-import { JsonLd } from '@/components/seo/JsonLd';
+import { SiteJsonLd } from '@/components/seo/JsonLd';
+import { OG_IMAGE, SITE_NAME, SITE_URL } from '@/lib/site';
 
-const SITE_URL = 'https://msclubsist.in';
+const TITLE = 'ORION 1.0 | 24-Hour National Level Hackathon in Chennai';
+// ~155 characters so Google shows it untruncated.
+const DESCRIPTION =
+  'ORION 1.0: a 24-hour national hackathon at Sathyabama, Chennai by Microsoft Club SIST. ₹1,00,000 prize pool, 4 AI, Web3 & climate tracks. Register for ₹100.';
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: 'ORION 1.0 — 24H National Level Hackathon | Microsoft Club SIST',
+    default: TITLE,
     template: '%s | ORION 1.0 Hackathon',
   },
-  description:
-    'ORION 1.0 is India’s premier 24-hour national student hackathon organized by Microsoft Club SIST at Sathyabama Institute of Science and Technology, Chennai. Compete for ₹1,00,000+ in cash prizes across Oceanic AI, Zero-Knowledge Blockchain, Climate-Tech Remote Sensing, and Open Innovation.',
-  applicationName: 'ORION 1.0 Hackathon Portal',
+  description: DESCRIPTION,
+  applicationName: SITE_NAME,
   keywords: [
     'ORION 1.0',
-    'ORION Hackathon',
+    'ORION hackathon',
+    'hackathon in Chennai',
+    'national level hackathon 2026',
+    '24 hour hackathon',
+    'Sathyabama hackathon',
     'Microsoft Club SIST',
-    'Sathyabama Hackathon',
-    'Sathyabama Institute of Science and Technology',
-    'National Hackathon 2026',
-    'Chennai Hackathon 2026',
-    '24-Hour Hackathon Chennai',
-    'Coding Competition Chennai',
-    'Student Hackathon India',
-    'College Hackathon 2026',
-    'AI Hackathon Chennai',
-    'FloatChat Oceanic AI',
-    'LexVault Zero Knowledge Blockchain',
-    'SylvaSense Satellite AI',
-    'Open Innovation Hackathon',
-    'Hackathon with Cash Prizes',
-    'SIST Microsoft Club',
-    'Tamil Nadu Hackathons',
-    'Engineering Hackathon 2026',
-    'Web3 Blockchain Hackathon India',
-    'Climate Tech Hackathon',
-    'Offline 24-Hour Coding Sprint',
-    'Top 70 Hackathon Qualifier',
+    'student hackathon India',
+    'AI hackathon',
+    'blockchain hackathon',
+    'climate tech hackathon',
+    'open innovation hackathon',
+    'hackathon with cash prizes',
   ],
-  authors: [
-    { name: 'Microsoft Club SIST', url: SITE_URL },
-    { name: 'Sathyabama Institute of Science and Technology', url: 'https://www.sathyabama.ac.in' },
-  ],
-  creator: 'Microsoft Club SIST Technical Crew',
+  authors: [{ name: 'Microsoft Club SIST', url: SITE_URL }],
+  creator: 'Microsoft Club SIST',
   publisher: 'Sathyabama Institute of Science and Technology',
   category: 'technology',
-  classification: 'National Level Student Hackathon & Innovation Sprint',
   formatDetection: {
     email: false,
     address: false,
@@ -57,40 +45,28 @@ export const metadata: Metadata = {
   },
   icons: {
     icon: [
+      { url: '/favicon.ico', sizes: 'any' },
+      { url: '/favicon.svg', type: 'image/svg+xml' },
       { url: '/favicon.png', sizes: '192x192', type: 'image/png' },
       { url: '/icon.png', sizes: '512x512', type: 'image/png' },
-      { url: '/favicon.ico', sizes: 'any' }
     ],
     shortcut: '/favicon.ico',
-    apple: [
-      { url: '/favicon.png', sizes: '192x192', type: 'image/png' },
-    ],
+    apple: [{ url: '/favicon.png', sizes: '192x192', type: 'image/png' }],
   },
   openGraph: {
-    title: 'ORION 1.0 — 24-Hour National Level Hackathon | Microsoft Club SIST',
-    description:
-      'India’s premier 24-hour national student hackathon at Sathyabama Institute of Science and Technology, Chennai. ₹1,00,000+ Prize Pool • 4 Cutting-Edge Challenge Tracks • Top 70 Offline Finale.',
-    url: SITE_URL,
-    siteName: 'ORION 1.0 National Hackathon',
-    images: [
-      {
-        url: '/logo.png',
-        width: 512,
-        height: 512,
-        alt: 'ORION 1.0 — Ignite the Genesis of Innovation • Microsoft Club SIST',
-      },
-    ],
+    title: TITLE,
+    description: DESCRIPTION,
+    url: '/',
+    siteName: SITE_NAME,
+    images: [OG_IMAGE],
     locale: 'en_IN',
     type: 'website',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'ORION 1.0 — 24H National Level Hackathon | Microsoft Club SIST',
-    description:
-      'Join India’s premier 24-hour national student hackathon at Sathyabama Institute of Science and Technology, Chennai. ₹1,00,000 Prize Pool. Register your squad now!',
-    images: ['/logo.png'],
-    creator: '@msclubsist',
-    site: '@msclubsist',
+    title: TITLE,
+    description: DESCRIPTION,
+    images: [OG_IMAGE],
   },
   robots: {
     index: true,
@@ -102,6 +78,11 @@ export const metadata: Metadata = {
       'max-image-preview': 'large',
       'max-snippet': -1,
     },
+  },
+  // Set these at build time after verifying the site in Google Search Console / Bing Webmaster Tools.
+  verification: {
+    google: process.env.GOOGLE_SITE_VERIFICATION || undefined,
+    other: process.env.BING_SITE_VERIFICATION ? { 'msvalidate.01': process.env.BING_SITE_VERIFICATION } : undefined,
   },
 };
 
@@ -119,17 +100,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className="scroll-smooth">
+    <html lang="en-IN" className="scroll-smooth">
       <head>
         {/* Geo Location Tags for Chennai / Local Search Ranking */}
         <meta name="geo.region" content="IN-TN" />
         <meta name="geo.placename" content="Chennai" />
         <meta name="geo.position" content="12.8718;80.2207" />
         <meta name="ICBM" content="12.8718, 80.2207" />
-        
-        {/* Search Engine Directives */}
-        <meta name="rating" content="General" />
-        <meta name="revisit-after" content="1 days" />
 
         {/* Google Fonts Preconnect */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -141,7 +118,7 @@ export default function RootLayout({
         />
         
         {/* JSON-LD Rich Structured Data Schemas */}
-        <JsonLd />
+        <SiteJsonLd />
       </head>
       <body className="bg-[#05070D] text-slate-100 antialiased selection:bg-cyan-500/25 selection:text-cyan-200">
         {children}

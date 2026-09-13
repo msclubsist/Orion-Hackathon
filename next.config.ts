@@ -85,7 +85,7 @@ const nextConfig: NextConfig = {
         source: "/orion-logo-v1.webp",
         headers: longLivedAssetHeaders,
       },
-      ...["/logo.png", "/icon.png", "/favicon.png", "/favicon.ico", "/favicon.svg", "/ORION_1.0_Template.pptx"].map(source => ({
+      ...["/logo.png", "/icon.png", "/favicon.png", "/favicon.ico", "/favicon.svg", "/og-image.png", "/llms.txt", "/ORION_1.0_Template.pptx"].map(source => ({
         source,
         headers: revalidatingAssetHeaders,
       })),
