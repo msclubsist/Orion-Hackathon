@@ -590,6 +590,58 @@ export const JUDGING_CRITERIA: JudgingCriterion[] = [
 ];
 
 export const FAQ_DATA: FAQItem[] = [
+  // 0. About ORION 1.0 — the questions people type into search engines first.
+  {
+    category: "About ORION 1.0",
+    question: "What is ORION 1.0?",
+    answer: "ORION 1.0 is a national level 24-hour hackathon organized by Microsoft Club SIST at Sathyabama Institute of Science and Technology (SIST), Chennai. It runs in two rounds: an online Round 1 where teams pitch their idea using the official PPT template, and a 24-hour offline Grand Finale at SIST Chennai for the Top 70 teams. The total prize pool is ₹1,00,000."
+  },
+  {
+    category: "About ORION 1.0",
+    question: "When and where is ORION 1.0 happening?",
+    answer: "• Round 1 (online): submit your PPT on or before 21 September 2026 — you can take part from anywhere in India.\n• Grand Finale (offline, Top 70 teams): 9–10 October 2026 (tentative) at Sathyabama Institute of Science and Technology, Jeppiaar Nagar, Rajiv Gandhi Salai (OMR), Chennai - 600119."
+  },
+  {
+    category: "About ORION 1.0",
+    question: "How do I register my team for ORION 1.0?",
+    answer: "Click \"Register Your Team — ₹100\" on this website to open the official registration form. Fill in your team details, pay the flat ₹100 Round 1 fee for the whole team, and submit your PPT made with the official ORION 1.0 template before 21 September 2026."
+  },
+  {
+    category: "About ORION 1.0",
+    question: "What are the problem statements and tracks in ORION 1.0?",
+    answer: "Round 1 has four tracks:\n• FloatChat (ORION-PS-01) — AI-powered natural-language query engine and 4D visualization for ARGO ocean data.\n• LexVault (ORION-PS-02) — zero-knowledge, blockchain-powered evidence vault for legal chains of custody.\n• SylvaSense (ORION-PS-03) — tree enumeration and biomass estimation from multi-spectral and SAR satellite imagery.\n• Open Innovation & Student Innovation Projects — your own idea in AI, Web3, cybersecurity or hardware (Round 1 only).\nOpen the Challenge Arena on this page for the full brief of each track."
+  },
+  {
+    category: "About ORION 1.0",
+    question: "Who organizes ORION 1.0?",
+    answer: "ORION 1.0 is organized by Microsoft Club SIST, the student technology community of Sathyabama Institute of Science and Technology, Chennai, under the patronage of the university's leadership and the School of Computing. Organizer contacts are listed in the Patrons & Organizers section of this page."
+  },
+  {
+    category: "About ORION 1.0",
+    question: "Can first-year students or non-CSE students take part?",
+    answer: "Yes. ORION 1.0 is open to all college students — undergraduate, postgraduate and PhD, from any year and any department — as well as early-career working professionals. Mixed teams across colleges, departments and years are welcome."
+  },
+  {
+    category: "About ORION 1.0",
+    question: "How are Round 1 submissions judged?",
+    answer: "Submissions are scored by the jury on four criteria:\n• Technical Innovation & Novelty — 30%\n• System Architecture & Engineering Depth — 30%\n• Feasibility & Real-World Impact — 20%\n• Presentation, Pitch & Live Defense — 20%\nFollowing the official PPT template exactly is mandatory; the Top 70 teams move on to the Grand Finale."
+  },
+  {
+    category: "About ORION 1.0",
+    question: "Do participants get certificates?",
+    answer: "Yes. Every participating team member receives an individual certificate of participation. Winners also receive Certificates of Merit and trophies at the Valedictory Ceremony at the end of the 24-hour Grand Finale."
+  },
+  {
+    category: "About ORION 1.0",
+    question: "Where can I download the official ORION 1.0 PPT template?",
+    answer: "The official template is available as a free download in the Guidelines section of this website (ORION_1.0_Template.pptx). Only this template is accepted — do not add, remove or reorder slides, and name your file TeamName_ORION1.0."
+  },
+  {
+    category: "About ORION 1.0",
+    question: "How do I get updates or contact the ORION 1.0 team?",
+    answer: "Join the official WhatsApp announcement group shared after registration and follow @orion1.0_ on Instagram for shortlist and schedule updates. For anything else, email orion.microsoftclub@gmail.com or ask ORION AI, the assistant on this website."
+  },
+
   // 1. Eligibility & Squads
   {
     category: "Eligibility & Squads",
@@ -678,7 +730,7 @@ export const FAQ_DATA: FAQItem[] = [
   {
     category: "Finale & Fees",
     question: "How are the Grand Finale problem statements distributed?",
-    answer: "All shortlisted teams receive their problem statements on the spot at the start of the 24-hour offline sprint at SIST Chennai (Grand Finale date announcing soon). Teams must build their solution on the problem statement assigned during the event. Open Innovation is not available in the final round."
+    answer: "All shortlisted teams receive their problem statements on the spot at the start of the 24-hour offline sprint at SIST Chennai (Grand Finale: 9–10 October 2026, tentative). Teams must build their solution on the problem statement assigned during the event. Open Innovation is not available in the final round."
   },
   {
     category: "Finale & Fees",

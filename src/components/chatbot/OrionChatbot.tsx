@@ -175,6 +175,22 @@ export const OrionChatbot: React.FC = () => {
     if (!hasOpenedOnce) setHasOpenedOnce(true);
   };
 
+  // Lets other sections (e.g. the FAQ's "Ask ORION AI") open the assistant,
+  // optionally with a question pre-sent: dispatch `orion:open-chat` with { question }.
+  const openRef = useRef({ handleOpen, sendMessage });
+  useEffect(() => {
+    openRef.current = { handleOpen, sendMessage };
+  });
+  useEffect(() => {
+    const onOpenChat = (event: Event) => {
+      const question = (event as CustomEvent<{ question?: string }>).detail?.question?.trim();
+      openRef.current.handleOpen();
+      if (question) openRef.current.sendMessage(question);
+    };
+    window.addEventListener('orion:open-chat', onOpenChat);
+    return () => window.removeEventListener('orion:open-chat', onOpenChat);
+  }, []);
+
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter' && !e.shiftKey) {
       e.preventDefault();
