@@ -2,14 +2,13 @@
  * Canonical public origin for SEO: canonical tags, sitemap, robots, Open Graph
  * and JSON-LD all derive from this one value.
  *
- * It used to be hardcoded as https://orion.sathyabama.ac.in — a hostname with
- * no DNS record — so every canonical and sitemap URL pointed search engines at
- * a dead domain. This is deliberately NOT read from NEXT_PUBLIC_SITE_URL: that
- * variable is http://localhost:3000 in .env.local, and a local build would bake
- * localhost into every canonical tag. If a custom domain is attached, change it
- * here (and 301 the workers.dev host to it).
+ * It must be the host that answers 200, not one that redirects: msclubsist.in
+ * 308s to www.msclubsist.in, and a canonical pointing at a redirect is a mixed
+ * signal Google may ignore. (It was once orion.sathyabama.ac.in, which has no
+ * DNS record at all.) Not read from NEXT_PUBLIC_SITE_URL, which is
+ * http://localhost:3000 in .env.local and would leak into local builds.
  */
-export const SITE_URL = 'https://orion-hackathon.gopinath2638.workers.dev';
+export const SITE_URL = 'https://www.msclubsist.in';
 
 export const SITE_NAME = 'ORION 1.0';
 
