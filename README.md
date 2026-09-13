@@ -502,7 +502,7 @@ ADMIN_SECRET_KEY=replace-with-a-long-random-secret
 CRON_SECRET=replace-with-a-long-random-secret         # Min 16 chars
 
 # ── Public Site Origin (used in email links) ────────────────────
-NEXT_PUBLIC_SITE_URL=https://orion-10-nine.vercel.app
+NEXT_PUBLIC_SITE_URL=https://msclubsist.in
 
 # ── Official WhatsApp Group Link ────────────────────────────────
 NEXT_PUBLIC_WHATSAPP_GROUP_URL=https://chat.whatsapp.com/orion1point0
@@ -562,7 +562,7 @@ The project includes a `vercel.json` configuring a daily cron job for payment re
 | **Email** | Nodemailer (SMTP) |
 | **Effects** | Canvas Confetti |
 | **Language** | TypeScript 5 |
-| **Deployment** | Cloudflare Workers (`orion-hackathon`); Vercel retained for redirects |
+| **Deployment** | Vercel (Next.js, with the payment reminder cron configured in `vercel.json`) |
 | **SEO** | JSON-LD, Open Graph, Twitter Cards, Sitemap, Robots, Geo tags |
 
 ---

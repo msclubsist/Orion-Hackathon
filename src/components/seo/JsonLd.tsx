@@ -4,7 +4,7 @@ import type { FAQItem } from '../../types/orion';
 import { features } from '@/lib/features';
 
 export const JsonLd: React.FC = () => {
-  const baseUrl = 'https://orion.sathyabama.ac.in';
+  const baseUrl = 'https://msclubsist.in';
 
   // 1. Event Schema (Google Hackathon / Competition Rich Snippet)
   const eventSchema = {

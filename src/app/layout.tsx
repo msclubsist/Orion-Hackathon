@@ -2,7 +2,7 @@ import type { Metadata, Viewport } from 'next';
 import './globals.css';
 import { JsonLd } from '@/components/seo/JsonLd';
 
-const SITE_URL = 'https://orion.sathyabama.ac.in';
+const SITE_URL = 'https://msclubsist.in';
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),

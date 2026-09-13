@@ -2,7 +2,7 @@ import { MetadataRoute } from 'next';
 import { features } from '@/lib/features';
 
 export default function robots(): MetadataRoute.Robots {
-  const baseUrl = 'https://orion.sathyabama.ac.in';
+  const baseUrl = 'https://msclubsist.in';
 
   return {
     rules: [

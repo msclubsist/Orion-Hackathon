@@ -22,7 +22,7 @@ import type { TeamRecord } from '@/types/orion';
 //   5. Distinct per-message identifiers so Gmail does not thread or collapse
 //      separate notices into one another.
 
-export const SITE_URL = (process.env.NEXT_PUBLIC_SITE_URL || 'https://orion-10-nine.vercel.app').replace(/\/+$/, '');
+export const SITE_URL = (process.env.NEXT_PUBLIC_SITE_URL || 'https://msclubsist.in').replace(/\/+$/, '');
 
 const SENDER_NAME = process.env.EMAIL_FROM_NAME || 'ORION 1.0 Secretariat';
 

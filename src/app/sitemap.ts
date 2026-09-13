@@ -2,7 +2,7 @@ import { MetadataRoute } from 'next';
 import { features } from '@/lib/features';
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = 'https://orion.sathyabama.ac.in';
+  const baseUrl = 'https://msclubsist.in';
   const currentDate = new Date().toISOString();
 
   const entries: MetadataRoute.Sitemap = [
