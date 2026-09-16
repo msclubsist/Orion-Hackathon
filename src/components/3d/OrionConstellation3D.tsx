@@ -21,9 +21,9 @@ export const OrionConstellation3D: React.FC = () => {
     const camera = new THREE.PerspectiveCamera(45, width / height, 0.1, 1000);
     camera.position.set(0, 0, 16);
 
-    const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+    const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true, powerPreference: 'low-power' });
     renderer.setSize(width, height);
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.25));
     container.appendChild(renderer.domElement);
 
     const ambientLight = new THREE.AmbientLight(0xffffff, 0.9);
@@ -32,8 +32,8 @@ export const OrionConstellation3D: React.FC = () => {
     const masterGroup = new THREE.Group();
     scene.add(masterGroup);
 
-    // Particle Cloud Background
-    const particlesCount = 280;
+    // Particle Cloud Background (Optimized count for mobile & desktop)
+    const particlesCount = 120;
     const particlesGeo = new THREE.BufferGeometry();
     const posArray = new Float32Array(particlesCount * 3);
     const colorArray = new Float32Array(particlesCount * 3);
@@ -223,9 +223,22 @@ export const OrionConstellation3D: React.FC = () => {
     ro.observe(container);
 
     let animId: number;
+    let isIntersecting = true;
     const clock = new THREE.Clock();
 
+    const io = new IntersectionObserver(([entry]) => {
+      isIntersecting = entry.isIntersecting;
+      if (isIntersecting && !animId) {
+        animate();
+      }
+    }, { threshold: 0.1 });
+    io.observe(container);
+
     const animate = () => {
+      if (!isIntersecting) {
+        animId = 0;
+        return;
+      }
       animId = requestAnimationFrame(animate);
       const elapsed = clock.getElapsedTime();
 
@@ -245,7 +258,8 @@ export const OrionConstellation3D: React.FC = () => {
     animate();
 
     return () => {
-      cancelAnimationFrame(animId);
+      io.disconnect();
+      if (animId) cancelAnimationFrame(animId);
       ro.disconnect();
       container.removeEventListener('mousemove', onPointerMove);
       container.removeEventListener('mousedown', onMouseDown);

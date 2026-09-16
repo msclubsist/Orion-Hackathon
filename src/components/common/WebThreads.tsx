@@ -190,7 +190,8 @@ export const WebThreads: React.FC<WebThreadsProps> = ({
       alpha: true,
       premultipliedAlpha: true,
       antialias: false,
-      dpr: Math.min(window.devicePixelRatio || 1, 2)
+      powerPreference: 'high-performance',
+      dpr: Math.min(window.devicePixelRatio || 1, 1.25)
     });
 
     const gl = renderer.gl;

@@ -92,6 +92,12 @@ export const ClickSpark: React.FC<ClickSparkProps> = ({
     let animationId: number;
 
     const draw = (timestamp: number) => {
+      if (sparksRef.current.length === 0) {
+        animationId = 0;
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        return;
+      }
+
       if (!startTimeRef.current) {
         startTimeRef.current = timestamp;
       }
@@ -124,13 +130,23 @@ export const ClickSpark: React.FC<ClickSparkProps> = ({
         return true;
       });
 
-      animationId = requestAnimationFrame(draw);
+      if (sparksRef.current.length > 0) {
+        animationId = requestAnimationFrame(draw);
+      } else {
+        animationId = 0;
+      }
     };
 
-    animationId = requestAnimationFrame(draw);
+    (canvasRef as unknown as { startDraw?: () => void }).startDraw = () => {
+      if (!animationId) {
+        animationId = requestAnimationFrame(draw);
+      }
+    };
 
     return () => {
-      cancelAnimationFrame(animationId);
+      if (animationId) {
+        cancelAnimationFrame(animationId);
+      }
     };
   }, [sparkColor, sparkSize, sparkRadius, sparkCount, duration, easeFunc, extraScale]);
 
@@ -150,6 +166,9 @@ export const ClickSpark: React.FC<ClickSparkProps> = ({
     }));
 
     sparksRef.current.push(...newSparks);
+    if ((canvasRef as unknown as { startDraw?: () => void }).startDraw) {
+      (canvasRef as unknown as { startDraw?: () => void }).startDraw!();
+    }
   };
 
   const handlePointerDown = (e: React.PointerEvent<HTMLDivElement>) => {
