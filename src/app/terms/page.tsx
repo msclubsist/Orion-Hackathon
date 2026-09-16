@@ -423,8 +423,8 @@ export default function TermsAndConditionsPage() {
       <footer className="relative z-10 border-t border-white/10 bg-[#030712] py-8 px-4 text-center text-xs text-[#64748B] font-mono">
         <p className="mb-2">© 2026 ORION 1.0 • Microsoft Club SIST. All rights reserved.</p>
         <div className="flex items-center justify-center gap-4 text-[11px] text-[#94A3B8]">
-          <a href="mailto:orion.microsoftclub@gmail.com" className="hover:text-[#38BDF8]">
-            orion.microsoftclub@gmail.com
+          <a href="mailto:msclubsist@gmail.com" className="hover:text-[#38BDF8]">
+            msclubsist@gmail.com
           </a>
           <span>•</span>
           <a href="https://www.instagram.com/orion1.0_" target="_blank" rel="noopener noreferrer" className="hover:text-[#38BDF8]">

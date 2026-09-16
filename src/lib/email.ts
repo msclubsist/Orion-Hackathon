@@ -831,7 +831,7 @@ export function generateResubmissionRequiredHtml(team: TeamRecord, reason: strin
                       💬 NEED IMMEDIATE HELP?
                     </div>
                     <p style="margin: 0 0 10px; font-size: 12.5px; color: #94A3B8; line-height: 1.5;">
-                      If you have questions regarding this request, reach out directly in the Official WhatsApp Community or email <a href="mailto:orion.microsoftclub@gmail.com" style="color: #38BDF8; text-decoration: underline;">orion.microsoftclub@gmail.com</a>.
+                      If you have questions regarding this request, reach out directly in the Official WhatsApp Community or email <a href="mailto:msclubsist@gmail.com" style="color: #38BDF8; text-decoration: underline;">msclubsist@gmail.com</a>.
                     </p>
                     <a href="${whatsappUrl}" target="_blank" style="font-size: 12px; font-weight: bold; color: #25D366; text-decoration: underline;">
                       Open WhatsApp Community Link →

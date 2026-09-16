@@ -491,7 +491,7 @@ function HelpCard({ className = '', onAsk }: { className?: string; onAsk: () => 
       </button>
       <div className="relative grid grid-cols-2 gap-2 mt-2">
         <a
-          href="mailto:orion.microsoftclub@gmail.com"
+          href="mailto:msclubsist@gmail.com"
           className="inline-flex items-center justify-center gap-1.5 px-3 py-2.5 text-[11px] font-sans font-semibold text-[#BAE6FD] bg-[#071426]/80 border border-white/10 hover:border-[#00BCF2]/60 transition-colors"
         >
           <Mail className="w-3.5 h-3.5" /> Email us

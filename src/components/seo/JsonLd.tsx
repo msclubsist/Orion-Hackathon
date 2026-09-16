@@ -43,7 +43,7 @@ export const SiteJsonLd: React.FC = () => {
         name: 'Microsoft Club SIST',
         alternateName: 'Microsoft Club, Sathyabama Institute of Science and Technology',
         url: SITE_URL,
-        email: 'orion.microsoftclub@gmail.com',
+        email: 'msclubsist@gmail.com',
         logo: {
           '@type': 'ImageObject',
           url: `${SITE_URL}/logo.png`,

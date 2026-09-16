@@ -639,7 +639,7 @@ export const FAQ_DATA: FAQItem[] = [
   {
     category: "About ORION 1.0",
     question: "How do I get updates or contact the ORION 1.0 team?",
-    answer: "Join the official WhatsApp announcement group shared after registration and follow @orion1.0_ on Instagram for shortlist and schedule updates. For anything else, email orion.microsoftclub@gmail.com or ask ORION AI, the assistant on this website."
+    answer: "Join the official WhatsApp announcement group shared after registration and follow @orion1.0_ on Instagram for shortlist and schedule updates. For anything else, email msclubsist@gmail.com or ask ORION AI, the assistant on this website."
   },
 
   // 1. Eligibility & Squads
