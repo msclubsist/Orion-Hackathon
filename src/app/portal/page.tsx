@@ -1148,7 +1148,7 @@ export default function TeamPortalPage() {
                           </div>
                           <div className="p-2.5 bg-[#040E24] border border-emerald-500/30 col-span-2 sm:col-span-1">
                             <div className="text-slate-400 text-[9px] font-mono-hud uppercase">Grand Finale</div>
-                            <div className="text-cyan-300 font-bold text-xs truncate">Oct 9–10 (Tent.) @ SIST</div>
+                            <div className="text-cyan-300 font-bold text-xs truncate">Announcing Soon</div>
                           </div>
                         </div>
                         <div className="p-2.5 bg-[#040E24]/80 border border-white/10 text-[11px] text-slate-300 font-sans leading-relaxed">

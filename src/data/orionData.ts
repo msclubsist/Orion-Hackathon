@@ -437,7 +437,7 @@ export const TIMELINE_PHASES: TimelinePhase[] = [
     number: "05",
     title: "24H OFFLINE GRAND FINALE",
     subtitle: "The Final Frontier at SIST Chennai",
-    date: "Oct 9–10, 2026 (Tentative) • SIST Chennai Campus",
+    date: "Announcing Soon",
     status: "upcoming",
     highlights: [
       "24-hour continuous coding sprint in dedicated mission arena",
