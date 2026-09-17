@@ -40,7 +40,7 @@ export default function TermsAndConditionsPage() {
             className="flex items-center gap-2 text-xs font-mono font-bold text-[#38BDF8] hover:text-white transition-colors group"
           >
             <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
-            <span>RETURN TO ORION 1.0 PORTAL</span>
+            <span>RETURN TO ORION 1.0 SITE</span>
           </Link>
 
           <div className="flex items-center gap-3">
@@ -198,7 +198,7 @@ export default function TermsAndConditionsPage() {
             <span>02. ELIGIBILITY & TEAM COMPOSITION</span>
           </div>
           <ul className="space-y-2 text-xs sm:text-sm text-slate-300 list-disc list-inside">
-            <li>ORION 1.0 is open to eligible student participants as specified in the official event announcement and registration portal.</li>
+            <li>ORION 1.0 is open to eligible student participants as specified in the official event announcement and registration details.</li>
             <li>Each team must consist of a minimum of <strong>2 members</strong> and a maximum of <strong>6 members</strong>.</li>
             <li>Participants must provide accurate information during registration.</li>
             <li>A participant may be registered as a member of only one team.</li>
@@ -411,7 +411,7 @@ export default function TermsAndConditionsPage() {
               href="/"
               className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-[#00BCF2] to-[#38BDF8] hover:brightness-110 text-[#040E24] font-display font-black text-xs uppercase tracking-wider shadow-[0_0_20px_rgba(56,189,248,0.4)]"
             >
-              <span>RETURN TO MAIN PORTAL</span>
+              <span>RETURN TO MAIN SITE</span>
               <ChevronRight className="w-4 h-4 text-[#040E24]" />
             </Link>
           </div>

@@ -49,7 +49,7 @@ export const formatShortDate = (iso: string): string =>
 
 export const GOOGLE_FORM_REGISTRATION_URL = "https://forms.gle/txiRwn9EELUgZvrJ6";
 
-/** Flip to true to bring the Team Portal (nav links + /portal + /portal/reset) back live. */
+/** Registration-related UI configuration. */
 
 export const PRIZE_TIERS = [
   {
@@ -287,7 +287,7 @@ export const IMPORTANT_RULES = [
     number: "01",
     title: "One PPT per Team",
     summary: "Each team is allowed to submit only one final PPT.",
-    detail: "Multiple submissions from the same team will not be accepted. Finalise your deck internally before uploading it through the Team Portal.",
+    detail: "Multiple submissions from the same team will not be accepted. Finalise your deck internally before uploading it through the official Google Drive submission link.",
     allowed: "One final PPT per team",
     notAllowed: "Multiple or duplicate submissions",
     icon: "FileCheck2",
@@ -663,7 +663,7 @@ export const FAQ_DATA: FAQItem[] = [
   {
     category: "Round 1 & PPT Submissions",
     question: "What do we need to submit for Round 1?",
-    answer: "Each team must submit an idea abstract and a pitch deck (PPT), prepared using the official ORION 1.0 template, through the Google Form / Team Portal on or before 21 September 2026. Only the prescribed template will be accepted — using any other format leads to disqualification."
+    answer: "Each team must submit an idea abstract and a pitch deck (PPT), prepared using the official ORION 1.0 template, through the official Google Drive submission link on or before 21 September 2026. Only the prescribed template will be accepted — using any other format leads to disqualification."
   },
   {
     category: "Round 1 & PPT Submissions",

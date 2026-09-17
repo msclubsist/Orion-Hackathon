@@ -9,10 +9,9 @@ import {
   ArrowRight
 } from 'lucide-react';
 import { GlassCard } from '../common/GlassCard';
-import { INITIAL_REGISTERED_TEAMS } from '../../data/orionData';
+import { INITIAL_REGISTERED_TEAMS, SUBMISSION_DRIVE_URL } from '../../data/orionData';
 import type { RegisteredTeam } from '../../types/orion';
 import { sound } from '../../audio/soundEffects';
-import Link from 'next/link';
 
 interface TeamStatusModalProps {
   isOpen: boolean;
@@ -204,14 +203,16 @@ export const TeamStatusModal: React.FC<TeamStatusModalProps> = ({ isOpen, onClos
                   </div>
 
                   <div className="pt-2">
-                    <Link
-                      href={`/portal?username=${result.username || ''}`}
+                    <a
+                      href={SUBMISSION_DRIVE_URL}
+                      target="_blank"
+                      rel="noopener noreferrer"
                       onClick={onClose}
                       className="btn-glow-cyan w-full py-2.5 font-display font-bold text-xs text-[#040E24] bg-gradient-to-r from-[#FFFFFF] via-[#BAE6FD] to-[#38BDF8] flex items-center justify-center gap-2 cursor-pointer shadow-md"
                     >
-                      <span>OPEN FULL SQUAD PORTAL</span>
+                      <span>UPLOAD PPT TO DRIVE</span>
                       <ArrowRight className="w-3.5 h-3.5" />
-                    </Link>
+                    </a>
                   </div>
                 </div>
               ) : lookupError ? (

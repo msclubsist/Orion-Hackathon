@@ -21,10 +21,9 @@ import {
   Upload
 } from 'lucide-react';
 import { GlassCard } from '../common/GlassCard';
-import { PROBLEM_STATEMENTS } from '../../data/orionData';
+import { PROBLEM_STATEMENTS, SUBMISSION_DRIVE_URL } from '../../data/orionData';
 import type { RegisteredTeam, TeamRegistrationPayload } from '../../types/orion';
 import { sound } from '../../audio/soundEffects';
-import Link from 'next/link';
 
 interface RegisterModalProps {
   isOpen: boolean;
@@ -332,7 +331,7 @@ export const RegisterModal: React.FC<RegisterModalProps> = ({
                   <span className="text-slate-400">• ₹100 Flat Fee</span>
                 </div>
                 <h3 className="text-xl sm:text-2xl font-display font-black text-white">
-                  SQUAD REGISTRATION PORTAL
+                  SQUAD REGISTRATION
                 </h3>
               </div>
             </div>
@@ -950,7 +949,7 @@ export const RegisterModal: React.FC<RegisterModalProps> = ({
                   REGISTRATION SUBMITTED, {registeredTeamData.teamName.toUpperCase()}
                 </h3>
                 <p className="text-xs text-[#BAE6FD] max-w-lg mx-auto mt-2 leading-relaxed">
-                  Your squad enrollment and payment UTR have been recorded. <strong>Admins will verify your payment status and update it in your Team Portal.</strong>
+                  Your squad enrollment and payment UTR have been recorded. <strong>Admins will verify your payment status and share updates through the official channels.</strong>
                 </p>
               </div>
 
@@ -958,7 +957,7 @@ export const RegisterModal: React.FC<RegisterModalProps> = ({
               <div className="p-5 bg-[#040E24] border border-[#38BDF8]/50 text-left space-y-4 max-w-lg mx-auto">
                 <div className="flex items-center justify-between border-b border-white/10 pb-3">
                   <div>
-                    <span className="text-[9px] font-mono-hud text-[#7DD3FC] block">PORTAL USERNAME</span>
+                    <span className="text-[9px] font-mono-hud text-[#7DD3FC] block">TEAM USERNAME</span>
                     <strong className="text-white font-mono text-lg font-bold">{registeredTeamData.username}</strong>
                     <span className="text-[9px] font-mono-hud text-[#7DD3FC]/70 block mt-1">
                       TEAM ID {registeredTeamData.teamId}
@@ -990,20 +989,22 @@ export const RegisterModal: React.FC<RegisterModalProps> = ({
                 </div>
 
                 <div className="p-2.5 bg-[#020817] border border-amber-400/30 text-[10px] font-mono text-amber-200/90 leading-relaxed">
-                  ⏳ <strong>Payment Status: Pending Verification</strong>. Save your Username and Passcode. You can log in to your <strong>Team Portal</strong> anytime to monitor your payment verification status and access Round 1 PPT submission once verified.
+                  ⏳ <strong>Payment Status: Pending Verification</strong>. Save your Username and Passcode. Upload your Round 1 PPT using the official Google Drive submission link.
                 </div>
               </div>
 
               {/* Action Buttons */}
               <div className="pt-3 flex flex-col sm:flex-row items-center justify-center gap-3">
-                <Link
-                  href={`/portal?username=${registeredTeamData.username}&token=${registeredTeamData.accessToken}`}
+                <a
+                  href={SUBMISSION_DRIVE_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   onClick={onClose}
                   className="btn-glow-cyan w-full sm:w-auto px-7 py-3 font-display font-black text-xs text-[#040E24] bg-gradient-to-r from-[#FFFFFF] via-[#BAE6FD] to-[#38BDF8] flex items-center justify-center gap-2 cursor-pointer shadow-lg active:scale-95"
                 >
-                  <span>GO TO TEAM PORTAL</span>
+                  <span>UPLOAD PPT TO DRIVE</span>
                   <ArrowRight className="w-4 h-4" />
-                </Link>
+                </a>
 
                 <button
                   type="button"

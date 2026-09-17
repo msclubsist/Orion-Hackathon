@@ -476,8 +476,8 @@ export const serverStore = {
     if (leaderOwnedTeam) {
       throw new Error(
         `This leader is already registered: squad "${leaderOwnedTeam.team_name}" (${leaderOwnedTeam.registration_id}). ` +
-        'Do NOT register again — open the Team Portal and sign in with that Registration ID and your access passcode. ' +
-        'Lost the passcode? Use "Forgot passcode" on the portal with your registered leader email.'
+        'Do NOT register again — use the official Google Drive submission link to upload your Round 1 PPT. ' +
+        'Contact the organisers through the official channels if you need help with your existing registration.'
       );
     }
 

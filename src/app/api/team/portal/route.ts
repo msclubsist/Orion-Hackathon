@@ -51,7 +51,7 @@ export async function GET(request: Request) {
       config
     });
   } catch (err: unknown) {
-    const msg = err instanceof Error ? err.message : 'Failed to load team portal data';
+    const msg = err instanceof Error ? err.message : 'Failed to load team data';
     return NextResponse.json({ error: msg }, { status: 500 });
   }
 }

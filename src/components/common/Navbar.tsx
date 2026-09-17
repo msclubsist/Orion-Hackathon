@@ -10,7 +10,7 @@ import {
   ChevronRight 
 } from 'lucide-react';
 import { GooeyNav } from './GooeyNav';
-import { GOOGLE_FORM_REGISTRATION_URL } from '@/data/orionData';
+import { GOOGLE_FORM_REGISTRATION_URL, SUBMISSION_DRIVE_URL } from '@/data/orionData';
 
 interface NavbarProps {
   registrationEnabled?: boolean;
@@ -117,12 +117,14 @@ export const Navbar: React.FC<NavbarProps> = ({ registrationEnabled = false }) =
           {/* Desktop Action Controls */}
           <div className="hidden lg:flex items-center gap-3 shrink-0">
             {registrationEnabled && (
-              <Link
-                href="/portal"
+              <a
+                href={SUBMISSION_DRIVE_URL}
+                target="_blank"
+                rel="noopener noreferrer"
                 className="px-3.5 py-2 rounded-none font-mono-hud font-bold text-xs text-[#BAE6FD] hover:text-white bg-[#07193D] border border-[#38BDF8]/40 hover:border-[#38BDF8] transition-all flex items-center gap-1.5 cursor-pointer shadow-sm"
               >
-                <span>TEAM PORTAL</span>
-              </Link>
+                <span>UPLOAD PPT</span>
+              </a>
             )}
 
             {/* Primary CTA */}
@@ -142,12 +144,14 @@ export const Navbar: React.FC<NavbarProps> = ({ registrationEnabled = false }) =
           {/* Mobile Navigation Toggle */}
           <div className="flex items-center gap-2 lg:hidden">
             {registrationEnabled && (
-              <Link
-                href="/portal"
+              <a
+                href={SUBMISSION_DRIVE_URL}
+                target="_blank"
+                rel="noopener noreferrer"
                 className="px-2.5 py-2 rounded-none font-mono-hud text-[11px] text-[#BAE6FD] bg-[#07193D] border border-[#38BDF8]/40"
               >
-                Portal
-              </Link>
+                Upload PPT
+              </a>
             )}
             <a
               href={GOOGLE_FORM_REGISTRATION_URL}
@@ -194,13 +198,15 @@ export const Navbar: React.FC<NavbarProps> = ({ registrationEnabled = false }) =
               })}
             </div>
             {registrationEnabled && <div className="grid grid-cols-2 gap-2 pt-2 border-t border-white/10">
-              <Link
-                href="/portal"
+              <a
+                href={SUBMISSION_DRIVE_URL}
+                target="_blank"
+                rel="noopener noreferrer"
                 onClick={() => setMobileMenuOpen(false)}
                 className="p-2.5 text-center text-xs font-mono-hud font-bold text-[#BAE6FD] bg-[#07193D] border border-[#38BDF8]/40"
               >
-                TEAM PORTAL
-              </Link>
+                UPLOAD PPT
+              </a>
               <Link
                 href="/admin"
                 onClick={() => setMobileMenuOpen(false)}

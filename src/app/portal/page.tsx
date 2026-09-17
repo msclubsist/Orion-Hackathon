@@ -362,7 +362,7 @@ export default function TeamPortalPage() {
             <div>
               <div className="flex items-center gap-1.5">
                 <span className="font-display font-black text-sm text-white group-hover:text-[#00BCF2] transition-colors">ORION 1.0</span>
-                <span className="text-[9px] font-mono bg-[#00BCF2]/15 text-[#38BDF8] px-1.5 py-0.2 border border-[#00BCF2]/30">TEAM PORTAL</span>
+                <span className="text-[9px] font-mono bg-[#00BCF2]/15 text-[#38BDF8] px-1.5 py-0.2 border border-[#00BCF2]/30">TEAM DASHBOARD</span>
               </div>
               <div className="text-[9px] font-sans text-slate-400">Microsoft Club SIST</div>
             </div>
@@ -420,7 +420,7 @@ export default function TeamPortalPage() {
                     AUTHENTICATED SQUAD ACCESS
                   </div>
                   <h2 className="text-xl font-display font-black text-white">
-                    TEAM PORTAL SIGN IN
+                    TEAM SIGN IN
                   </h2>
                 </div>
               </div>
