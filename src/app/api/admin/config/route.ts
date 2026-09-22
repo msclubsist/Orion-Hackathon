@@ -2,10 +2,10 @@ import { NextResponse } from 'next/server';
 import { serverStore } from '@/lib/serverStore';
 import { checkRateLimit, getClientIp } from '@/lib/rateLimit';
 import { isAdminRequest } from '@/lib/adminAuth';
-import { registrationApiGuard } from '@/lib/features';
+import { portalApiGuard } from '@/lib/features';
 
 export async function GET(request: Request) {
-  const disabled = registrationApiGuard();
+  const disabled = portalApiGuard();
   if (disabled) return disabled;
 
   try {
@@ -24,7 +24,7 @@ export async function GET(request: Request) {
 }
 
 export async function POST(request: Request) {
-  const disabled = registrationApiGuard();
+  const disabled = portalApiGuard();
   if (disabled) return disabled;
 
   try {

@@ -2,10 +2,10 @@ import { isAdminRequest } from '@/lib/adminAuth';
 import { serverStore } from '@/lib/serverStore';
 import { resolveFileUrl } from '@/lib/storage';
 import { receiptContentType } from '@/lib/paymentProof';
-import { registrationApiGuard } from '@/lib/features';
+import { portalApiGuard } from '@/lib/features';
 
 export async function GET(request: Request) {
-  const disabled = registrationApiGuard();
+  const disabled = portalApiGuard();
   if (disabled) return disabled;
 
   if (!isAdminRequest(request)) return new Response('Unauthorized', { status: 401 });
