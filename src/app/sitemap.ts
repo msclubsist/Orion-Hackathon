@@ -19,7 +19,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
   ];
 
-  if (features.registration) {
+  if (features.portal || features.registration) {
     entries.push({
       url: `${SITE_URL}/portal`,
       lastModified: CONTENT_LAST_MODIFIED,

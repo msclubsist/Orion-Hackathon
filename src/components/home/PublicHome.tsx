@@ -42,9 +42,10 @@ const TeamStatusModal = dynamic(
 
 interface PublicHomeProps {
   registrationEnabled: boolean;
+  portalEnabled?: boolean;
 }
 
-export function PublicHome({ registrationEnabled }: PublicHomeProps) {
+export function PublicHome({ registrationEnabled, portalEnabled = true }: PublicHomeProps) {
   const [isRegisterOpen, setIsRegisterOpen] = useState(false);
   const [isStatusOpen, setIsStatusOpen] = useState(false);
   const [selectedProblem, setSelectedProblem] = useState<ProblemStatement | null>(null);
@@ -80,7 +81,7 @@ export function PublicHome({ registrationEnabled }: PublicHomeProps) {
         <div data-scroll-progress className="scroll-progress" aria-hidden="true" />
         <SpaceBackground />
         <MotionEffects />
-        <Navbar registrationEnabled={registrationEnabled} onOpenStatus={openStatus} />
+        <Navbar registrationEnabled={registrationEnabled} portalEnabled={portalEnabled} onOpenStatus={openStatus} />
 
         <main className="relative z-10 flex flex-col">
           <HeroSection

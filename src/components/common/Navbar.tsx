@@ -10,10 +10,11 @@ import {
   ChevronRight 
 } from 'lucide-react';
 import { GooeyNav } from './GooeyNav';
-import { GOOGLE_FORM_REGISTRATION_URL, SUBMISSION_DRIVE_URL } from '@/data/orionData';
+import { GOOGLE_FORM_REGISTRATION_URL } from '@/data/orionData';
 
 interface NavbarProps {
   registrationEnabled?: boolean;
+  portalEnabled?: boolean;
   onOpenRegister?: () => void;
   onOpenStatus?: () => void;
 }
@@ -29,7 +30,7 @@ const NAV_ITEMS = [
   { label: "VENUE & PERKS", href: "#venue" },
 ];
 
-export const Navbar: React.FC<NavbarProps> = ({ registrationEnabled = false }) => {
+export const Navbar: React.FC<NavbarProps> = ({ registrationEnabled = false, portalEnabled = true }) => {
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('');
@@ -116,15 +117,13 @@ export const Navbar: React.FC<NavbarProps> = ({ registrationEnabled = false }) =
 
           {/* Desktop Action Controls */}
           <div className="hidden lg:flex items-center gap-3 shrink-0">
-            {registrationEnabled && (
-              <a
-                href={SUBMISSION_DRIVE_URL}
-                target="_blank"
-                rel="noopener noreferrer"
+            {portalEnabled && (
+              <Link
+                href="/portal"
                 className="px-3.5 py-2 rounded-none font-mono-hud font-bold text-xs text-[#BAE6FD] hover:text-white bg-[#07193D] border border-[#38BDF8]/40 hover:border-[#38BDF8] transition-all flex items-center gap-1.5 cursor-pointer shadow-sm"
               >
-                <span>UPLOAD PPT</span>
-              </a>
+                <span>TEAM PORTAL</span>
+              </Link>
             )}
 
             {/* Primary CTA */}
@@ -143,15 +142,13 @@ export const Navbar: React.FC<NavbarProps> = ({ registrationEnabled = false }) =
 
           {/* Mobile Navigation Toggle */}
           <div className="flex items-center gap-2 lg:hidden">
-            {registrationEnabled && (
-              <a
-                href={SUBMISSION_DRIVE_URL}
-                target="_blank"
-                rel="noopener noreferrer"
+            {portalEnabled && (
+              <Link
+                href="/portal"
                 className="px-2.5 py-2 rounded-none font-mono-hud text-[11px] text-[#BAE6FD] bg-[#07193D] border border-[#38BDF8]/40"
               >
-                Upload PPT
-              </a>
+                Portal
+              </Link>
             )}
             <a
               href={GOOGLE_FORM_REGISTRATION_URL}
@@ -197,16 +194,16 @@ export const Navbar: React.FC<NavbarProps> = ({ registrationEnabled = false }) =
                 );
               })}
             </div>
-            {registrationEnabled && <div className="grid grid-cols-2 gap-2 pt-2 border-t border-white/10">
-              <a
-                href={SUBMISSION_DRIVE_URL}
-                target="_blank"
-                rel="noopener noreferrer"
-                onClick={() => setMobileMenuOpen(false)}
-                className="p-2.5 text-center text-xs font-mono-hud font-bold text-[#BAE6FD] bg-[#07193D] border border-[#38BDF8]/40"
-              >
-                UPLOAD PPT
-              </a>
+            <div className={`grid ${portalEnabled ? 'grid-cols-2' : 'grid-cols-1'} gap-2 pt-2 border-t border-white/10`}>
+              {portalEnabled && (
+                <Link
+                  href="/portal"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="p-2.5 text-center text-xs font-mono-hud font-bold text-[#BAE6FD] bg-[#07193D] border border-[#38BDF8]/40"
+                >
+                  TEAM PORTAL
+                </Link>
+              )}
               <Link
                 href="/admin"
                 onClick={() => setMobileMenuOpen(false)}
@@ -214,7 +211,7 @@ export const Navbar: React.FC<NavbarProps> = ({ registrationEnabled = false }) =
               >
                 ADMIN
               </Link>
-            </div>}
+            </div>
           </div>
         )}
       </header>

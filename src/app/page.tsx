@@ -6,7 +6,7 @@ export default function Home() {
   return (
     <>
       <HomeJsonLd />
-      <PublicHome registrationEnabled={features.registration} />
+      <PublicHome registrationEnabled={features.registration} portalEnabled={features.portal} />
     </>
   );
 }

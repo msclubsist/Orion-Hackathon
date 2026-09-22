@@ -7,8 +7,8 @@ export const metadata: Metadata = {
   description:
     'Official team dashboard for ORION 1.0 Hackathon. Track payment verification status and monitor Grand Finale shortlisting.',
   robots: {
-    index: features.registration,
-    follow: features.registration,
+    index: features.portal || features.registration,
+    follow: features.portal || features.registration,
   },
 };
 
@@ -17,7 +17,7 @@ export default function PortalLayout({
 }: {
   children: React.ReactNode;
 }) {
-  if (!features.registration) notFound();
+  if (!features.portal && !features.registration) notFound();
 
   return <>{children}</>;
 }

@@ -10,13 +10,34 @@ export function isRegistrationEnabled(value = process.env.REGISTRATION_ENABLED):
   return value?.trim().toLowerCase() === 'true';
 }
 
+export function isPortalEnabled(value = process.env.PORTAL_ENABLED ?? 'true'): boolean {
+  return value?.trim().toLowerCase() !== 'false';
+}
+
 export const features = Object.freeze({
   registration: isRegistrationEnabled(),
+  portal: isPortalEnabled(),
 });
 
 /** Return before rate limits, request parsing, database access, storage, or mail. */
 export function registrationApiGuard(): Response | null {
   if (features.registration) return null;
+
+  return Response.json(
+    { error: 'Not found' },
+    {
+      status: 404,
+      headers: {
+        'Cache-Control': 'private, no-store',
+        'X-Robots-Tag': 'noindex, nofollow',
+      },
+    }
+  );
+}
+
+/** Return before rate limits, request parsing, database access, storage, or mail for portal routes. */
+export function portalApiGuard(): Response | null {
+  if (features.portal || features.registration) return null;
 
   return Response.json(
     { error: 'Not found' },

@@ -1,10 +1,10 @@
 import { NextResponse } from 'next/server';
 import { serverStore, toTeamFacingRecord } from '@/lib/serverStore';
 import { checkRateLimit, getClientIp } from '@/lib/rateLimit';
-import { registrationApiGuard } from '@/lib/features';
+import { portalApiGuard } from '@/lib/features';
 
 export async function POST(request: Request) {
-  const disabled = registrationApiGuard();
+  const disabled = portalApiGuard();
   if (disabled) return disabled;
 
   try {
