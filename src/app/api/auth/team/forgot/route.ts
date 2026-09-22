@@ -48,7 +48,7 @@ async function settleAfter(startedAt: number): Promise<void> {
 }
 
 export async function POST(request: Request) {
-  const disabled = registrationApiGuard();
+  const disabled = portalApiGuard();
   if (disabled) return disabled;
 
   const startedAt = Date.now();

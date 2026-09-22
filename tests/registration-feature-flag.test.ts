@@ -10,10 +10,8 @@ const guardedApiRoutes = [
   'src/app/api/admin/payment-proof/route.ts',
   'src/app/api/admin/registrations/route.ts',
   'src/app/api/admin/session/route.ts',
-  'src/app/api/auth/team/forgot/route.ts',
   'src/app/api/auth/team/reset/route.ts',
   'src/app/api/auth/team/reset/verify/route.ts',
-  'src/app/api/auth/team/route.ts',
   'src/app/api/cron/payment-reminders/route.ts',
   'src/app/api/private-files/route.ts',
   'src/app/api/registrations/count/route.ts',
@@ -23,6 +21,11 @@ const guardedApiRoutes = [
   'src/app/api/team/portal/route.ts',
   'src/app/api/team/resubmission/route.ts',
   'src/app/api/team/submission/route.ts',
+];
+
+const portalApiRoutes = [
+  'src/app/api/auth/team/forgot/route.ts',
+  'src/app/api/auth/team/route.ts',
 ];
 
 describe('registration feature flag', () => {
@@ -39,6 +42,27 @@ describe('registration feature flag', () => {
       const source = fs.readFileSync(path.join(root, relativePath), 'utf8');
       const guardIndex = source.indexOf('registrationApiGuard()');
       expect(guardIndex, `${relativePath} is missing registrationApiGuard()`).toBeGreaterThan(-1);
+
+      const expensiveIndexes = [
+        source.indexOf('checkRateLimit('),
+        source.indexOf('serverStore.'),
+        source.indexOf('request.formData('),
+        source.indexOf('request.json('),
+      ].filter(index => index >= 0);
+
+      if (expensiveIndexes.length > 0) {
+        expect(guardIndex, `${relativePath} performs work before its feature guard`).toBeLessThan(
+          Math.min(...expensiveIndexes)
+        );
+      }
+    }
+  });
+
+  it('guards portal authentication APIs before expensive work', () => {
+    for (const relativePath of portalApiRoutes) {
+      const source = fs.readFileSync(path.join(root, relativePath), 'utf8');
+      const guardIndex = source.indexOf('portalApiGuard()');
+      expect(guardIndex, `${relativePath} is missing portalApiGuard()`).toBeGreaterThan(-1);
 
       const expensiveIndexes = [
         source.indexOf('checkRateLimit('),
