@@ -85,7 +85,7 @@ describe('registration feature flag', () => {
     expect(portalLayout).toContain('notFound()');
 
     const adminLayout = fs.readFileSync(path.join(root, 'src/app/admin/layout.tsx'), 'utf8');
-    expect(adminLayout).toContain('features.portal || features.registration');
+    expect(adminLayout).toContain('!features.portal && !features.registration');
     expect(adminLayout).toContain('notFound()');
   });
 

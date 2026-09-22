@@ -17,7 +17,7 @@ export default function AdminLayout({
 }: {
   children: React.ReactNode;
 }) {
-  if (!features.registration) notFound();
+  if (!features.portal && !features.registration) notFound();
 
   return <>{children}</>;
 }
