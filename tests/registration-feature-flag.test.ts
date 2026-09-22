@@ -6,10 +6,6 @@ import { isRegistrationEnabled } from '@/lib/features';
 const root = path.resolve(__dirname, '..');
 
 const guardedApiRoutes = [
-  'src/app/api/admin/config/route.ts',
-  'src/app/api/admin/payment-proof/route.ts',
-  'src/app/api/admin/registrations/route.ts',
-  'src/app/api/admin/session/route.ts',
   'src/app/api/auth/team/reset/route.ts',
   'src/app/api/auth/team/reset/verify/route.ts',
   'src/app/api/cron/payment-reminders/route.ts',
@@ -24,6 +20,10 @@ const guardedApiRoutes = [
 ];
 
 const portalApiRoutes = [
+  'src/app/api/admin/config/route.ts',
+  'src/app/api/admin/payment-proof/route.ts',
+  'src/app/api/admin/registrations/route.ts',
+  'src/app/api/admin/session/route.ts',
   'src/app/api/auth/team/forgot/route.ts',
   'src/app/api/auth/team/route.ts',
 ];
