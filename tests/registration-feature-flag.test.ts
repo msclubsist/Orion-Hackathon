@@ -80,11 +80,13 @@ describe('registration feature flag', () => {
   });
 
   it('server-guards the portal and admin route trees', () => {
-    for (const relativePath of ['src/app/portal/layout.tsx', 'src/app/admin/layout.tsx']) {
-      const source = fs.readFileSync(path.join(root, relativePath), 'utf8');
-      expect(source).toContain('features.registration');
-      expect(source).toContain('notFound()');
-    }
+    const portalLayout = fs.readFileSync(path.join(root, 'src/app/portal/layout.tsx'), 'utf8');
+    expect(portalLayout).toContain('features.portal || features.registration');
+    expect(portalLayout).toContain('notFound()');
+
+    const adminLayout = fs.readFileSync(path.join(root, 'src/app/admin/layout.tsx'), 'utf8');
+    expect(adminLayout).toContain('features.portal || features.registration');
+    expect(adminLayout).toContain('notFound()');
   });
 
   it('does not call registration APIs from the disabled public homepage bundle', () => {
