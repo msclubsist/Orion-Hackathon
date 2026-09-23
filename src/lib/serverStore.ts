@@ -470,8 +470,8 @@ export const serverStore = {
     // soft suspicion flags below — those can be legitimate mistakes worth a
     // human look rather than a hard wall.)
     const leaderOwnedTeam = existingTeamsForDupCheck.find(t =>
-      t.leader_email.toLowerCase() === cleanLeaderEmail ||
-      t.leader_phone.replace(/[\s\-()]/g, '') === cleanLeaderPhone
+      (t.leader_email && t.leader_email.toLowerCase() === cleanLeaderEmail) ||
+      (t.leader_phone && t.leader_phone.replace(/[\s\-()]/g, '') === cleanLeaderPhone)
     );
     if (leaderOwnedTeam) {
       throw new Error(
@@ -485,7 +485,7 @@ export const serverStore = {
     const suspicionFlags: SuspicionFlag[] = [];
 
     const duplicateLeaderEmailTeam = existingTeamsForDupCheck.find(t => 
-      t.leader_email.toLowerCase() === cleanLeaderEmail ||
+      (t.leader_email && t.leader_email.toLowerCase() === cleanLeaderEmail) ||
       (t.members && t.members.some(m => m.member_email && m.member_email.toLowerCase() === cleanLeaderEmail))
     );
     if (duplicateLeaderEmailTeam) {
@@ -502,7 +502,7 @@ export const serverStore = {
     }
 
     const duplicateLeaderPhoneTeam = existingTeamsForDupCheck.find(t => 
-      t.leader_phone.replace(/[\s\-()]/g, '') === cleanLeaderPhone ||
+      (t.leader_phone && t.leader_phone.replace(/[\s\-()]/g, '') === cleanLeaderPhone) ||
       (t.members && t.members.some(m => m.member_phone.replace(/[\s\-()]/g, '') === cleanLeaderPhone))
     );
     if (duplicateLeaderPhoneTeam) {
@@ -523,8 +523,8 @@ export const serverStore = {
       const memberEmailClean = (m.email || '').trim().toLowerCase();
 
       const match = existingTeamsForDupCheck.find(t =>
-        (memberEmailClean && (t.leader_email.toLowerCase() === memberEmailClean || (t.members && t.members.some(tm => tm.member_email?.toLowerCase() === memberEmailClean)))) ||
-        (memberPhoneClean && (t.leader_phone.replace(/[\s\-()]/g, '') === memberPhoneClean || (t.members && t.members.some(tm => tm.member_phone.replace(/[\s\-()]/g, '') === memberPhoneClean))))
+        (memberEmailClean && ((t.leader_email && t.leader_email.toLowerCase() === memberEmailClean) || (t.members && t.members.some(tm => tm.member_email?.toLowerCase() === memberEmailClean)))) ||
+        (memberPhoneClean && ((t.leader_phone && t.leader_phone.replace(/[\s\-()]/g, '') === memberPhoneClean) || (t.members && t.members.some(tm => tm.member_phone.replace(/[\s\-()]/g, '') === memberPhoneClean))))
       );
 
       if (match) {
@@ -717,55 +717,46 @@ export const serverStore = {
 
     if (!cleanId || !cleanSecret) return null;
 
-    // Only the username is accepted here. Registration IDs and leader emails
-    // still identify a team everywhere else in the system, but they are not
-    // logins: the ID is quoted in group chats and the leader email is guessable,
-    // and neither is something the whole squad reliably knows. The username is
-    // the team's own name with case, spaces and punctuation normalised away, so
-    // "Tech Titans" and "techtitans" reach the same account.
-    const cleanUsername = toUsername(cleanId);
-    if (!cleanUsername) return null;
+    const norm = (s: string) => (s || '').toLowerCase().replace(/[^a-z0-9]/g, '');
+    const cleanNorm = norm(cleanId);
+    if (!cleanNorm) return null;
 
     if (isSupabaseConfigured() && supabase) {
       try {
-        // Value passed as an argument and LIKE wildcards escaped — never
-        // interpolated into the filter grammar, or `*` would match every row.
-        // Not limit(1): a username is NOT unique. Migration 016 loads the
-        // organisers' credential sheet verbatim, and four separate squads on it
-        // are called TECHTITANS. Every row on the username is fetched and the
-        // passcode picks the one that owns it — (username, passcode) is the
-        // login key, and that pair is what the database enforces as unique.
-        let { data: teams, error } = await supabase
+        // 1. Fast, single-row query: lookup by unique access_token (unique code from Excel)
+        const { data: byToken, error: tokenErr } = await supabase
           .from('teams')
           .select('*')
-          .ilike('username', escapeLikeValue(cleanUsername))
-          .limit(25);
+          .eq('access_token', cleanSecret)
+          .limit(2);
 
-        // The column arrives with migration 015. If the app is deployed ahead
-        // of the migration the query fails, and without this branch that means
-        // no team can sign in at all — so derive the username from team_name in
-        // memory instead. The roster is small enough for a full read; this path
-        // disappears the moment the migration lands.
-        if (error) {
-          console.warn(
-            `[auth] username lookup failed (${error.message}) — falling back to ` +
-            'team_name matching. Apply migrations/015_team_username.sql.'
+        if (!tokenErr && byToken && byToken.length > 0) {
+          const matched = byToken.find(t =>
+            norm(t.team_name) === cleanNorm ||
+            norm(t.username) === cleanNorm ||
+            norm(t.registration_id) === cleanNorm ||
+            t.team_name?.toLowerCase().trim() === cleanId.toLowerCase() ||
+            (t.username && t.username.toLowerCase().trim() === cleanId.toLowerCase()) ||
+            t.registration_id?.toLowerCase().trim() === cleanId.toLowerCase()
           );
-          const legacy = await supabase
-            .from('teams')
-            .select('*')
-            .order('created_at', { ascending: true });
-          if (!legacy.error && legacy.data) {
-            teams = legacy.data.filter(t => toUsername(t.team_name) === cleanUsername);
-            error = null;
+
+          if (matched) {
+            return await this.getTeam(matched.id);
           }
         }
+
+        // 2. Secondary check: search by team_name, username, or registration_id with case-insensitive token comparison
+        const { data: teams, error } = await supabase
+          .from('teams')
+          .select('*')
+          .or(`team_name.ilike.${escapeLikeValue(cleanId)},username.ilike.${escapeLikeValue(cleanId)},registration_id.ilike.${escapeLikeValue(cleanId)}`)
+          .limit(5);
 
         if (!error && teams && teams.length > 0) {
           const matched = teams.find(t =>
             typeof t.access_token === 'string' &&
             t.access_token.length > 0 &&
-            safeEqualCI(t.access_token, cleanSecret)
+            (t.access_token === cleanSecret || safeEqualCI(t.access_token, cleanSecret))
           );
 
           if (matched) {
@@ -780,12 +771,21 @@ export const serverStore = {
     const store = loadLocalStore();
 
     const team = store.teams.find(t => {
-      const matchId = (t.username || toUsername(t.team_name)) === cleanUsername;
       const matchSecret =
         typeof t.access_token === 'string' &&
         t.access_token.length > 0 &&
-        safeEqualCI(t.access_token, cleanSecret);
-      return matchId && matchSecret;
+        (t.access_token === cleanSecret || safeEqualCI(t.access_token, cleanSecret));
+
+      if (!matchSecret) return false;
+
+      return (
+        norm(t.team_name) === cleanNorm ||
+        norm(t.username) === cleanNorm ||
+        norm(t.registration_id) === cleanNorm ||
+        t.team_name?.toLowerCase().trim() === cleanId.toLowerCase() ||
+        (t.username && t.username.toLowerCase().trim() === cleanId.toLowerCase()) ||
+        t.registration_id?.toLowerCase().trim() === cleanId.toLowerCase()
+      );
     });
 
     if (!team) return null;
@@ -1282,9 +1282,10 @@ export const serverStore = {
     const cleanLower = clean.toLowerCase();
     const cleanUsername = toUsername(clean);
     const team = store.teams.find(t =>
-      t.id.toLowerCase() === cleanLower ||
-      t.registration_id.toLowerCase() === cleanLower ||
-      t.leader_email.toLowerCase() === cleanLower ||
+      (t.id && t.id.toLowerCase() === cleanLower) ||
+      (t.registration_id && t.registration_id.toLowerCase() === cleanLower) ||
+      (t.leader_email && t.leader_email.toLowerCase() === cleanLower) ||
+      (t.team_name && t.team_name.toLowerCase() === cleanLower) ||
       (!!cleanUsername && (t.username || toUsername(t.team_name)) === cleanUsername)
     );
 

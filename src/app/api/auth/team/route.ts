@@ -16,8 +16,6 @@ export async function POST(request: Request) {
       }, { status: 429 });
     }
 
-    // `teamId` is the wire name kept for older clients; the value is a
-    // username — the team's own name, lowercased with spaces removed.
     const body = await request.json();
     const username = body?.username ?? body?.teamId;
 
@@ -29,10 +27,7 @@ export async function POST(request: Request) {
 
     if (!team) {
       return NextResponse.json({
-        error: 'Invalid credentials. Your username is your team name as one word and your ' +
-               'passcode is your team leader\'s name as one word — drop the spaces and ' +
-               'punctuation from both, so "Tech Titans" led by "Deekshith. P" is ' +
-               'techtitans / deekshithp. Capitals do not matter.'
+        error: 'Invalid credentials. Your username is your Team Name and your passcode is the unique code provided in the official Excel allocation sheet.'
       }, { status: 401 });
     }
 

@@ -431,10 +431,8 @@ export default function TeamPortalPage() {
                   tells them apart, so it has to be the leader who registered. */}
               <div className="mb-5 p-3 bg-[#040E24] border border-[#38BDF8]/25 text-[#BAE6FD] text-[11px] font-mono-hud leading-relaxed">
                 Sign in with your <span className="text-white font-bold">team name</span> as the
-                username and your <span className="text-white font-bold">team leader&apos;s name</span> as
-                the passcode. Drop the spaces and punctuation from both — &ldquo;Tech Titans&rdquo;
-                led by &ldquo;Deekshith. P&rdquo; is <span className="text-[#38BDF8]">techtitans</span> /{' '}
-                <span className="text-[#38BDF8]">deekshithp</span>. Capitals do not matter.
+                username and your <span className="text-white font-bold">unique passcode</span> sent in the
+                official excel sheet. (e.g. username: <span className="text-[#38BDF8]">Innovex</span> or <span className="text-[#38BDF8]">techtitans</span>, passcode: your unique allocation code).
               </div>
 
               {authError && (
@@ -447,28 +445,28 @@ export default function TeamPortalPage() {
               <form onSubmit={handleLoginSubmit} className="space-y-4">
                 <div>
                   <label className="block text-[11px] font-mono-hud text-[#BAE6FD] mb-1">
-                    USERNAME (your team name, no spaces) <span className="text-[#38BDF8]">*</span>
+                    USERNAME (team name) <span className="text-[#38BDF8]">*</span>
                   </label>
                   <input
                     type="text"
                     required
                     value={teamIdInput}
                     onChange={(e) => setTeamIdInput(e.target.value)}
-                    placeholder="e.g. techtitans"
+                    placeholder="e.g. Tech Titans or techtitans"
                     className="w-full px-3.5 py-2.5 bg-[#040E24] border border-[rgba(212,233,255,0.15)] text-white text-xs font-mono-hud focus:border-[#38BDF8] focus:outline-none"
                   />
                 </div>
 
                 <div>
                   <label className="block text-[11px] font-mono-hud text-[#BAE6FD] mb-1">
-                    PASSCODE (your team leader&apos;s name, no spaces) <span className="text-[#38BDF8]">*</span>
+                    PASSCODE (unique code from Excel sheet) <span className="text-[#38BDF8]">*</span>
                   </label>
                   <input
                     type="password"
                     required
                     value={secretInput}
                     onChange={(e) => setSecretInput(e.target.value)}
-                    placeholder="e.g. deekshithp"
+                    placeholder="Enter your unique passcode"
                     className="w-full px-3.5 py-2.5 bg-[#040E24] border border-[rgba(212,233,255,0.15)] text-white text-xs font-mono-hud focus:border-[#38BDF8] focus:outline-none"
                   />
                 </div>
