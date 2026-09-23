@@ -75,12 +75,12 @@ export const CountdownTimer: React.FC = () => {
         <div className="flex items-center gap-2">
           <Clock className="w-4 h-4 text-[#00BCF2]" />
           <span className="text-xs font-sans text-[#F8FAFC] font-bold uppercase tracking-wider">
-            ROUND 1 LAUNCH WINDOW COUNTDOWN
+            ROUND 1 RESULTS COUNTDOWN
           </span>
         </div>
         <div className="inline-flex items-center gap-1.5 text-[9px] sm:text-[10px] font-sans text-[#22D3EE] bg-[#071426]/90 px-2.5 py-1 border border-[#00BCF2]/40 rounded-none font-semibold self-start sm:self-auto backdrop-blur-xl">
           <ShieldAlert className="w-3 h-3 text-[#22D3EE]" />
-          <span>ROUND 1 CLOSES: {EVENT_METRICS.deadlineDate.toUpperCase()}</span>
+          <span>ROUND 1 RESULTS: {EVENT_METRICS.deadlineDate.toUpperCase()}</span>
         </div>
       </div>
 
@@ -98,7 +98,7 @@ export const CountdownTimer: React.FC = () => {
       </div>
 
       <div className="mt-3 flex flex-col sm:flex-row items-center justify-between text-[9px] sm:text-[10px] font-sans text-[#94A3B8] pt-2 border-t border-white/10 gap-1">
-        <span>ONLINE QUALIFIER DEADLINE: {ONLINE_DEADLINE_SHORT} (23:59 IST)</span>
+        <span>ROUND 1 RESULTS DECLARATION: {ONLINE_DEADLINE_SHORT} (23:59 IST)</span>
         <span className="text-[#22D3EE] font-bold">24H OFFLINE FINALE: {OFFLINE_FINALE_SHORT} @ SIST CHENNAI</span>
       </div>
     </div>

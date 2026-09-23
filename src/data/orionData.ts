@@ -23,10 +23,10 @@ export const EVENT_METRICS = {
   datesTBA: "Announcing Soon",
   /** Round 1 / registration deadline — confirmed. */
   round1DatesAnnounced: true,
-  deadlineDate: "September 21, 2026",
-  deadlineIso: "2026-09-21T23:59:59+05:30",
-  onlineDeadlineDate: "September 21, 2026",
-  onlineDeadlineIso: "2026-09-21T23:59:59+05:30",
+  deadlineDate: "September 30, 2026",
+  deadlineIso: "2026-09-30T23:59:59+05:30",
+  onlineDeadlineDate: "September 30, 2026",
+  onlineDeadlineIso: "2026-09-30T23:59:59+05:30",
   /** Grand Finale date — flip to true and update the values below once confirmed. */
   finaleDateAnnounced: true,
   /** Finale date is a tentative hold, not yet locked — keep true until organisers confirm. */
