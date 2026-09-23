@@ -389,8 +389,8 @@ export const TIMELINE_PHASES: TimelinePhase[] = [
     number: "01",
     title: "MISSION REGISTRATIONS & ONLINE SUBMISSION",
     subtitle: "Round 1 Online Qualifier",
-    date: "Active Now — Closes Sep 21, 2026",
-    status: "active",
+    date: "Closed — Submissions Finalized",
+    status: "completed",
     highlights: [
       "Flat ₹100 registration fee per team (2–6 members)",
       "Choose from 3 Flagship Problem Statements OR Open Innovation & Student Innovation Projects (AI, Web3, Systems, Cloud, Healthcare, Hardware) — welcome only for Round 1",
@@ -401,8 +401,8 @@ export const TIMELINE_PHASES: TimelinePhase[] = [
     number: "02",
     title: "ONLINE SCREENING & JURY EVALUATION",
     subtitle: "Rigorous Technical Filter",
-    date: "Announcing Soon",
-    status: "upcoming",
+    date: "Active Now — In Progress",
+    status: "active",
     highlights: [
       "Jury review across Innovation, Feasibility, Technical Depth & Impact",
       "Plagiarism, template compliance, and architectural soundness validation",
@@ -413,7 +413,7 @@ export const TIMELINE_PHASES: TimelinePhase[] = [
     number: "03",
     title: "THE CUT — TOP 70 FINALISTS ANNOUNCED",
     subtitle: "Elite Shortlist Notification",
-    date: "Announcing Soon",
+    date: "September 30, 2026",
     status: "upcoming",
     highlights: [
       "Official publication of Top 70 Finalist Teams",
