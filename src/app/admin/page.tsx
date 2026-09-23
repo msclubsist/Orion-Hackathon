@@ -931,17 +931,19 @@ export default function AdminDashboard() {
   // Filtered Teams
   const filteredTeams = teams.filter((t) => {
     const q = searchQuery.toLowerCase().trim();
-    const matchesSearch = !q || (
-      t.registration_id.toLowerCase().includes(q) ||
-      t.team_name.toLowerCase().includes(q) ||
-      t.leader_name.toLowerCase().includes(q) ||
-      t.leader_email.toLowerCase().includes(q) ||
-      t.leader_phone.includes(q) ||
+    const matchesSearch = !q || Boolean(
+      (t.registration_id && t.registration_id.toLowerCase().includes(q)) ||
+      (t.team_name && t.team_name.toLowerCase().includes(q)) ||
+      (t.username && t.username.toLowerCase().includes(q)) ||
+      (t.leader_name && t.leader_name.toLowerCase().includes(q)) ||
+      (t.leader_email && t.leader_email.toLowerCase().includes(q)) ||
+      (t.leader_phone && t.leader_phone.includes(q)) ||
       (t.payment?.utr_number && t.payment.utr_number.toLowerCase().includes(q)) ||
-      t.institution.toLowerCase().includes(q)
+      (t.institution && t.institution.toLowerCase().includes(q)) ||
+      (t.problem_statement && t.problem_statement.toLowerCase().includes(q))
     );
 
-    const matchesTrack = selectedTrack === 'ALL' || t.problem_statement.includes(selectedTrack);
+    const matchesTrack = selectedTrack === 'ALL' || Boolean(t.problem_statement && t.problem_statement.includes(selectedTrack));
     const matchesPayment = selectedPaymentStatus === 'ALL' || t.payment_status === selectedPaymentStatus;
     const matchesRound = selectedRoundStatus === 'ALL' || t.round_1_status === selectedRoundStatus;
     const matchesSuspicious = !onlySuspicious || ((t.suspicion_flags?.length || 0) > 0);
@@ -1387,11 +1389,15 @@ export default function AdminDashboard() {
                               )}
                             </div>
                             <div className="text-xs text-slate-300 font-sans flex flex-wrap items-center gap-x-3 gap-y-0.5">
-                              <span>Leader: <strong>{team.leader_name}</strong> ({team.leader_phone})</span>
+                              <span>Leader: <strong>{team.leader_name}</strong>{team.leader_phone ? ` (${team.leader_phone})` : ''}</span>
+                              {team.institution && (
+                                <>
+                                  <span>•</span>
+                                  <span className="text-slate-400 truncate max-w-xs">{team.institution}</span>
+                                </>
+                              )}
                               <span>•</span>
-                              <span className="text-slate-400 truncate max-w-xs">{team.institution}</span>
-                              <span>•</span>
-                              <span className="text-[#38BDF8] font-mono">{team.problem_statement}</span>
+                              <span className="text-[#38BDF8] font-mono">{team.problem_statement || 'Unassigned'}</span>
                             </div>
                           </div>
 

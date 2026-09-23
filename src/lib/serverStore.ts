@@ -2674,13 +2674,17 @@ export const serverStore = {
     if (filters?.search) {
       const q = filters.search.toLowerCase().trim();
       filteredTeams = filteredTeams.filter(t => 
-        t.registration_id.toLowerCase().includes(q) ||
-        t.team_name.toLowerCase().includes(q) ||
-        t.leader_name.toLowerCase().includes(q) ||
-        t.leader_email.toLowerCase().includes(q) ||
-        t.leader_phone.includes(q) ||
-        (t.payment?.utr_number && t.payment.utr_number.toLowerCase().includes(q)) ||
-        t.institution.toLowerCase().includes(q)
+        Boolean(
+          (t.registration_id && t.registration_id.toLowerCase().includes(q)) ||
+          (t.team_name && t.team_name.toLowerCase().includes(q)) ||
+          (t.username && t.username.toLowerCase().includes(q)) ||
+          (t.leader_name && t.leader_name.toLowerCase().includes(q)) ||
+          (t.leader_email && t.leader_email.toLowerCase().includes(q)) ||
+          (t.leader_phone && t.leader_phone.includes(q)) ||
+          (t.payment?.utr_number && t.payment.utr_number.toLowerCase().includes(q)) ||
+          (t.institution && t.institution.toLowerCase().includes(q)) ||
+          (t.problem_statement && t.problem_statement.toLowerCase().includes(q))
+        )
       );
     }
 
@@ -2693,7 +2697,7 @@ export const serverStore = {
     }
 
     if (filters?.track && filters.track !== 'ALL') {
-      filteredTeams = filteredTeams.filter(t => t.problem_statement.includes(filters.track!));
+      filteredTeams = filteredTeams.filter(t => Boolean(t.problem_statement && t.problem_statement.includes(filters.track!)));
     }
 
     if (filters?.onlySuspicious) {

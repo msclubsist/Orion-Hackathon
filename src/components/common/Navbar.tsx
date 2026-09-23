@@ -30,7 +30,7 @@ const NAV_ITEMS = [
   { label: "VENUE & PERKS", href: "#venue" },
 ];
 
-export const Navbar: React.FC<NavbarProps> = ({ registrationEnabled = false, portalEnabled = true }) => {
+export const Navbar: React.FC<NavbarProps> = ({ registrationEnabled: _registrationEnabled = false, portalEnabled = true }) => {
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('');
