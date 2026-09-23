@@ -38,6 +38,7 @@ import type { TeamRecord, TeamMember, AuditLogRecord, SystemConfig, EvaluationSc
 import { sound } from '@/audio/soundEffects';
 import confetti from 'canvas-confetti';
 import { PaymentReceiptModal } from '@/components/modals/PaymentReceiptModal';
+import { CredentialsPanel } from '@/components/admin/CredentialsPanel';
 
 // Not a credential: a flag saying "this tab logged in", so a reload can try to
 // resume. The real session is the HttpOnly cookie, which JS cannot read.
@@ -130,8 +131,7 @@ export default function AdminDashboard() {
   const [authError, setAuthError] = useState('');
   const [isLoading, setIsLoading] = useState(false);
 
-  // Active Tab: 'TEAMS' | 'AUDIT_LOGS' | 'SETTINGS'
-  const [activeTab, setActiveTab] = useState<'TEAMS' | 'AUDIT_LOGS' | 'SETTINGS'>('TEAMS');
+  const [activeTab, setActiveTab] = useState<'TEAMS' | 'CREDENTIALS' | 'AUDIT_LOGS' | 'SETTINGS'>('TEAMS');
 
   // Dashboard Data State
   const [teams, setTeams] = useState<TeamRecord[]>([]);
@@ -427,6 +427,12 @@ export default function AdminDashboard() {
     setIsAuthenticated(false);
     setTeams([]);
   };
+
+  const handleCredentialSessionExpired = useCallback(() => {
+    sessionStorage.removeItem(ADMIN_SESSION_HINT);
+    setIsAuthenticated(false);
+    setTeams([]);
+  }, []);
 
   // Perform Admin Action: Payment or Round 1 Evaluation
   const handleAdminAction = async (payload: {
@@ -1152,7 +1158,7 @@ export default function AdminDashboard() {
             </div>
 
             {/* NAVIGATION TABS */}
-            <div className="flex items-center gap-2 border-b border-white/10 pb-2">
+            <div className="flex flex-wrap items-center gap-2 border-b border-white/10 pb-2">
               <button
                 onClick={() => setActiveTab('TEAMS')}
                 className={`px-4 py-2 text-xs font-mono-hud font-bold border transition-all cursor-pointer ${
@@ -1162,6 +1168,17 @@ export default function AdminDashboard() {
                 }`}
               >
                 SQUAD ROSTER & EVALUATION ({teams.length})
+              </button>
+
+              <button
+                onClick={() => setActiveTab('CREDENTIALS')}
+                className={`px-4 py-2 text-xs font-mono-hud font-bold border transition-all cursor-pointer ${
+                  activeTab === 'CREDENTIALS'
+                    ? 'bg-[#38BDF8]/20 border-[#38BDF8] text-white shadow-[0_0_10px_rgba(56,189,248,0.3)]'
+                    : 'bg-[#040E24] border-white/10 text-slate-400 hover:text-white'
+                }`}
+              >
+                TEAM CREDENTIALS
               </button>
 
               <button
@@ -1429,6 +1446,10 @@ export default function AdminDashboard() {
                   )}
                 </div>
               </div>
+            )}
+
+            {activeTab === 'CREDENTIALS' && (
+              <CredentialsPanel onUnauthorized={handleCredentialSessionExpired} />
             )}
 
             {/* TAB 2: AUDIT LOGS */}

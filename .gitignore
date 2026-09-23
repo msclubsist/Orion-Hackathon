@@ -45,6 +45,8 @@ next-env.d.ts
 
 # local persistent database store
 .data/
+/team_credentials.csv
+/team_credentials_with_id.csv
 
 # root temporary files
 /*.pptx

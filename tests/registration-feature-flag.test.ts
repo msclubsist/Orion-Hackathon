@@ -21,6 +21,7 @@ const guardedApiRoutes = [
 
 const portalApiRoutes = [
   'src/app/api/admin/config/route.ts',
+  'src/app/api/admin/credentials/route.ts',
   'src/app/api/admin/payment-proof/route.ts',
   'src/app/api/admin/registrations/route.ts',
   'src/app/api/admin/session/route.ts',
