@@ -721,6 +721,37 @@ export const serverStore = {
     const cleanNorm = norm(cleanId);
     if (!cleanNorm) return null;
 
+    const isIdentifierMatch = (t: {
+      team_name?: string | null;
+      username?: string | null;
+      registration_id?: string | null;
+      leader_name?: string | null;
+    }): boolean => {
+      const tNameNorm = norm(t.team_name || '');
+      const tUserNorm = norm(t.username || '');
+      const tRegNorm = norm(t.registration_id || '');
+      const tLeadNorm = norm(t.leader_name || '');
+
+      if (
+        tNameNorm === cleanNorm ||
+        tUserNorm === cleanNorm ||
+        tRegNorm === cleanNorm ||
+        tLeadNorm === cleanNorm ||
+        t.team_name?.toLowerCase().trim() === cleanId.toLowerCase() ||
+        (t.username && t.username.toLowerCase().trim() === cleanId.toLowerCase()) ||
+        t.registration_id?.toLowerCase().trim() === cleanId.toLowerCase()
+      ) {
+        return true;
+      }
+
+      // Allow base name match (e.g., 'Codenova' matching 'Codenova X' or 'techtitans' matching 'techtitans2')
+      if (cleanNorm.length >= 3) {
+        if (tNameNorm && (tNameNorm.startsWith(cleanNorm) || cleanNorm.startsWith(tNameNorm))) return true;
+        if (tUserNorm && (tUserNorm.startsWith(cleanNorm) || cleanNorm.startsWith(tUserNorm))) return true;
+      }
+      return false;
+    };
+
     if (isSupabaseConfigured() && supabase) {
       try {
         // 1. Fast, single-row query: lookup by unique access_token (unique code from Excel)
@@ -731,26 +762,19 @@ export const serverStore = {
           .limit(2);
 
         if (!tokenErr && byToken && byToken.length > 0) {
-          const matched = byToken.find(t =>
-            norm(t.team_name) === cleanNorm ||
-            norm(t.username) === cleanNorm ||
-            norm(t.registration_id) === cleanNorm ||
-            t.team_name?.toLowerCase().trim() === cleanId.toLowerCase() ||
-            (t.username && t.username.toLowerCase().trim() === cleanId.toLowerCase()) ||
-            t.registration_id?.toLowerCase().trim() === cleanId.toLowerCase()
-          );
+          const matched = byToken.find(t => isIdentifierMatch(t));
 
           if (matched) {
             return await this.getTeam(matched.id);
           }
         }
 
-        // 2. Secondary check: search by team_name, username, or registration_id with case-insensitive token comparison
+        // 2. Secondary check: search by team_name, username, registration_id, or leader_name with case-insensitive token comparison
         const { data: teams, error } = await supabase
           .from('teams')
           .select('*')
-          .or(`team_name.ilike.${escapeLikeValue(cleanId)},username.ilike.${escapeLikeValue(cleanId)},registration_id.ilike.${escapeLikeValue(cleanId)}`)
-          .limit(5);
+          .or(`team_name.ilike.%${escapeLikeValue(cleanId)}%,username.ilike.%${escapeLikeValue(cleanId)}%,registration_id.ilike.%${escapeLikeValue(cleanId)}%`)
+          .limit(10);
 
         if (!error && teams && teams.length > 0) {
           const matched = teams.find(t =>
@@ -778,14 +802,7 @@ export const serverStore = {
 
       if (!matchSecret) return false;
 
-      return (
-        norm(t.team_name) === cleanNorm ||
-        norm(t.username) === cleanNorm ||
-        norm(t.registration_id) === cleanNorm ||
-        t.team_name?.toLowerCase().trim() === cleanId.toLowerCase() ||
-        (t.username && t.username.toLowerCase().trim() === cleanId.toLowerCase()) ||
-        t.registration_id?.toLowerCase().trim() === cleanId.toLowerCase()
-      );
+      return isIdentifierMatch(t);
     });
 
     if (!team) return null;
