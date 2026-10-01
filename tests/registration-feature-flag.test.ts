@@ -90,12 +90,12 @@ describe('registration feature flag', () => {
     expect(adminLayout).toContain('notFound()');
   });
 
-  it('serves the MS Club homepage and hosts ORION hackathon at /orion', () => {
+  it('serves the MS Club homepage with club-logo and no hackathon info, while hosting hackathon at /orion', () => {
     const homeSource = fs.readFileSync(path.join(root, 'src/app/page.tsx'), 'utf8');
     expect(homeSource).not.toContain('/api/registrations/count');
     expect(homeSource).toContain('Microsoft Club');
-    expect(homeSource).toContain('/orion');
-    expect(homeSource).toContain('/logo.png');
+    expect(homeSource).toContain('/club-logo.png');
+    expect(homeSource.toLowerCase()).not.toContain('hackathon');
 
     const orionSource = fs.readFileSync(path.join(root, 'src/app/orion/page.tsx'), 'utf8');
     expect(orionSource).toContain('PublicHome');
