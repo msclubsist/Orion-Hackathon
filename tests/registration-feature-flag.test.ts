@@ -90,10 +90,16 @@ describe('registration feature flag', () => {
     expect(adminLayout).toContain('notFound()');
   });
 
-  it('serves the public homepage through the custom 404 boundary', () => {
-    const source = fs.readFileSync(path.join(root, 'src/app/page.tsx'), 'utf8');
-    expect(source).not.toContain('/api/registrations/count');
-    expect(source).toContain('notFound()');
+  it('serves the MS Club homepage and hosts ORION hackathon at /orion', () => {
+    const homeSource = fs.readFileSync(path.join(root, 'src/app/page.tsx'), 'utf8');
+    expect(homeSource).not.toContain('/api/registrations/count');
+    expect(homeSource).toContain('Microsoft Club');
+    expect(homeSource).toContain('/orion');
+    expect(homeSource).toContain('/logo.png');
+
+    const orionSource = fs.readFileSync(path.join(root, 'src/app/orion/page.tsx'), 'utf8');
+    expect(orionSource).toContain('PublicHome');
+    expect(orionSource).toContain('HomeJsonLd');
 
     const notFoundPage = fs.readFileSync(path.join(root, 'src/app/not-found.tsx'), 'utf8');
     expect(notFoundPage).toContain('404');

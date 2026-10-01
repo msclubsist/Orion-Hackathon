@@ -17,6 +17,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: 'weekly',
       priority: 0.6,
     },
+    {
+      url: `${SITE_URL}/orion`,
+      lastModified: CONTENT_LAST_MODIFIED,
+      changeFrequency: 'daily',
+      priority: 0.9,
+      images: [`${SITE_URL}${OG_IMAGE.url}`, `${SITE_URL}/orion-logo-v1.webp`],
+    },
   ];
 
   if (features.portal || features.registration) {
