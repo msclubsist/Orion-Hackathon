@@ -90,15 +90,14 @@ describe('registration feature flag', () => {
     expect(adminLayout).toContain('notFound()');
   });
 
-  it('does not call registration APIs from the disabled public homepage bundle', () => {
+  it('serves the public homepage through the custom 404 boundary', () => {
     const source = fs.readFileSync(path.join(root, 'src/app/page.tsx'), 'utf8');
     expect(source).not.toContain('/api/registrations/count');
-    expect(source).toContain('features.registration');
+    expect(source).toContain('notFound()');
 
-    const publicHome = fs.readFileSync(path.join(root, 'src/components/home/PublicHome.tsx'), 'utf8');
-    expect(publicHome.indexOf('if (!registrationEnabled) return')).toBeLessThan(
-      publicHome.indexOf("fetch('/api/registrations/count')")
-    );
+    const notFoundPage = fs.readFileSync(path.join(root, 'src/app/not-found.tsx'), 'utf8');
+    expect(notFoundPage).toContain('404');
+    expect(notFoundPage).toContain('Page not found');
   });
 
   it('keeps the public Google Form registration CTA independent from the internal flag', () => {

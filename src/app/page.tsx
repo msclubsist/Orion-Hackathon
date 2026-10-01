@@ -1,12 +1,5 @@
-import { PublicHome } from '@/components/home/PublicHome';
-import { HomeJsonLd } from '@/components/seo/JsonLd';
-import { features } from '@/lib/features';
+import { notFound } from 'next/navigation';
 
 export default function Home() {
-  return (
-    <>
-      <HomeJsonLd />
-      <PublicHome registrationEnabled={features.registration} portalEnabled={features.portal} />
-    </>
-  );
+  notFound();
 }
